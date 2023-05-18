@@ -10,6 +10,8 @@ const userRepository = new UserRepository();
 const userService = new UserService(userRepository);
 const userController = new UserController(userService);
 
-usersRoutes.post("/", userController.create);
+usersRoutes.post("/", (request, response) => {
+  return userController.create(request, response);
+});
 
 export { usersRoutes };

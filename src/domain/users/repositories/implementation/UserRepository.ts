@@ -25,7 +25,7 @@ export class UserRepository implements IUserRepository {
   }
 
   async create(user: User): Promise<void> {
-    this.repository.create(user);
+    await this.repository.save(user);
   }
 
   async update(user: User, payload: IUserFormData): Promise<User> {

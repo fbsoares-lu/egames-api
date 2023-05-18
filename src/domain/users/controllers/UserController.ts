@@ -2,11 +2,7 @@ import { Request, Response } from "express";
 import { UserService } from "../service/UserService";
 
 export class UserController {
-  private userService: UserService;
-
-  constructor(userService: UserService) {
-    this.userService = userService;
-  }
+  constructor(private userService: UserService) {}
 
   public async create(request: Request, response: Response) {
     try {
@@ -20,8 +16,8 @@ export class UserController {
 
       return response.status(201).send();
     } catch (error) {
-      return response.json({
-        error: error,
+      return response.status(500).json({
+        error: error.message,
       });
     }
   }

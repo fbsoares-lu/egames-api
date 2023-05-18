@@ -22,13 +22,13 @@ export class User {
   @Column()
   public password: string;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ name: "created_at" })
   public createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ name: "updated_at" })
   public updatedAt: Date;
 
-  @DeleteDateColumn()
+  @DeleteDateColumn({ name: "deleted_at" })
   public deletedAt: Date | null;
 
   constructor(name: string, email: string, password: string) {

@@ -37,7 +37,9 @@ export class UserService {
 
     const user = new User(name, email, encryptedPassword);
 
-    this.userRepository.create(user);
+    console.log(user);
+
+    await this.userRepository.create(user);
   }
 
   async updateUser({ id, email, name }: IUpdateUserRequest): Promise<User> {
