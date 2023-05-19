@@ -14,6 +14,10 @@ export class InMemoryUserRepository implements IUserRepository {
     this.repository = [];
   }
 
+  async findByEmail(email: string): Promise<User | null> {
+    throw new Error("Method not implemented.");
+  }
+
   async find(): Promise<User[]> {
     throw new Error("Method not implemented.");
   }
@@ -30,7 +34,7 @@ export class InMemoryUserRepository implements IUserRepository {
     throw new Error("Method not implemented.");
   }
 
-  async delete(id: string): Promise<void> {
+  async delete(user: User): Promise<void> {
     throw new Error("Method not implemented.");
   }
 }

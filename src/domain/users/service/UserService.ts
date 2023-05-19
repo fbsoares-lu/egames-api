@@ -13,7 +13,6 @@ interface IUpdateUserRequest {
   id: string;
   name: string;
   email: string;
-  password: string;
 }
 
 export class UserService {
@@ -28,6 +27,16 @@ export class UserService {
     return await bcrypt.hash(password, saltRounds);
   }
 
+  async showUser(id: string): Promise<User | null> {
+    const users = await this.userRepository.findById(id);
+    return users;
+  }
+
+  async listUsers(): Promise<User[]> {
+    const users = await this.userRepository.find();
+    return users;
+  }
+
   async createUser({
     email,
     name,
@@ -36,9 +45,6 @@ export class UserService {
     const encryptedPassword = await this.encryptedPassword(password);
 
     const user = new User(name, email, encryptedPassword);
-
-    console.log(user);
-
     await this.userRepository.create(user);
   }
 
@@ -49,7 +55,25 @@ export class UserService {
       throw new Error("user does not exist!");
     }
 
+    if (user.email != email) {
+      const emailAlreadyExists = await this.userRepository.findByEmail(email);
+
+      if (emailAlreadyExists) {
+        throw new Error("user does not exist!");
+      }
+    }
+
     const response = await this.userRepository.update(user, { email, name });
     return response;
+  }
+
+  async deleteUser(id: string): Promise<void> {
+    const user = await this.userRepository.findById(id);
+
+    if (!user) {
+      throw new Error("user does not exist!");
+    }
+
+    this.userRepository.delete(user);
   }
 }
