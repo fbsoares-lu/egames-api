@@ -1,8 +1,8 @@
 import { Router } from "express";
 
-import { UserController } from "../domain/users/controllers/UserController";
-import { UserService } from "../domain/users/service/UserService";
-import { UserRepository } from "../domain/users/repositories/implementation/UserRepository";
+import { UserController } from "../domain/accounts/controllers/UserController";
+import { UserService } from "../domain/accounts/useCases/UserService";
+import { UserRepository } from "../domain/accounts/repositories/implementation/UserRepository";
 
 const usersRoutes = Router();
 
