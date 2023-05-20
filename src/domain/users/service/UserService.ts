@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 
 import { IUserRepository } from "../repositories/IUserRepository";
 import { User } from "../entities/User";
+import { NotFoundException } from "../../../errors/NotFoundException";
 
 interface ICreateUserRequest {
   name: string;
@@ -71,7 +72,7 @@ export class UserService {
     const user = await this.userRepository.findById(id);
 
     if (!user) {
-      throw new Error("user does not exist!");
+      throw new NotFoundException("user does not exist!");
     }
 
     this.userRepository.delete(user);
