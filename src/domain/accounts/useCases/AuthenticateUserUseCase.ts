@@ -37,7 +37,7 @@ export class AuthenticateUserUseCase {
       throw new UnauthorizedException("email or password incorrect!");
     }
 
-    const token = jwt.sign({}, String(process.env.JWT_PRIVATE_KEY), {
+    const token = jwt.sign({}, String(process.env.PRIVATE_ACCESS_KEY), {
       subject: user.id,
       expiresIn: "1d",
     });

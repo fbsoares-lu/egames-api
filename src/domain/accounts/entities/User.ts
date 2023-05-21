@@ -11,7 +11,7 @@ import {
 @Entity("users")
 export class User {
   @PrimaryGeneratedColumn("uuid")
-  public id: string;
+  public id?: string;
 
   @Column()
   public name: string;
@@ -23,13 +23,13 @@ export class User {
   public password: string;
 
   @CreateDateColumn({ name: "created_at" })
-  public createdAt: Date;
+  public createdAt?: Date;
 
   @UpdateDateColumn({ name: "updated_at" })
-  public updatedAt: Date;
+  public updatedAt?: Date;
 
   @DeleteDateColumn({ name: "deleted_at" })
-  public deletedAt: Date | null;
+  public deletedAt?: Date | null;
 
   constructor(name: string, email: string, password: string) {
     this.id = randomUUID();

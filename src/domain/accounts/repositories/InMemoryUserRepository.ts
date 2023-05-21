@@ -1,40 +1,43 @@
 import { User } from "../entities/User";
 import { IUserRepository } from "./IUserRepository";
 
-interface IUserFormData {
-  name: string;
-  email: string;
-  password: string;
-}
-
 export class InMemoryUserRepository implements IUserRepository {
-  public repository: IUserFormData[];
+  public repository: User[];
 
   constructor() {
     this.repository = [];
   }
 
-  async findByEmail(email: string): Promise<User | null> {
-    throw new Error("Method not implemented.");
+  async findByEmail(email: string) {
+    const user = this.repository.find((item) => item.email === email);
+    return user!;
   }
 
   async find(): Promise<User[]> {
-    throw new Error("Method not implemented.");
+    const user = this.repository;
+    return user;
   }
 
-  async findById(id: string): Promise<User | null> {
-    throw new Error("Method not implemented.");
+  async findById(id: string) {
+    const user = this.repository.find((item) => item.id === id);
+    return user!;
   }
 
-  async create(payload: IUserFormData): Promise<void> {
-    this.repository.push(payload);
+  async create(payload: User): Promise<void> {
+    this.repository.push(
+      new User(payload.name, payload.email, payload.password)
+    );
   }
 
-  async update(user: User, payload: IUserFormData): Promise<User> {
-    throw new Error("Method not implemented.");
+  async update(user: User, payload: User) {
+    const userIndex = this.repository.findIndex((item) => item.id === user.id);
+
+    this.repository[userIndex] = payload;
+    return this.repository[userIndex];
   }
 
   async delete(user: User): Promise<void> {
-    throw new Error("Method not implemented.");
+    const userIndex = this.repository.findIndex((item) => item.id === user.id);
+    this.repository.splice(userIndex, 1);
   }
 }

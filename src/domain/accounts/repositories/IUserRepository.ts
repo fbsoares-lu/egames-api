@@ -5,11 +5,11 @@ interface IUserFormData {
   email: string;
 }
 
-export interface IUserRepository {
-  find(): Promise<User[]>;
-  findById(id: string): Promise<User | null>;
-  findByEmail(email: string): Promise<User | null>;
-  create(user: User): Promise<void>;
-  update(user: User, payload: IUserFormData): Promise<User>;
-  delete(user: User): Promise<void>;
+export abstract class IUserRepository {
+  abstract find(): Promise<User[]>;
+  abstract findById(id: string): Promise<User>;
+  abstract findByEmail(email: string): Promise<User>;
+  abstract create(user: User): Promise<void>;
+  abstract update(user: User, payload: IUserFormData): Promise<User>;
+  abstract delete(user: User): Promise<void>;
 }
