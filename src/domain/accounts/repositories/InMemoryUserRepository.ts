@@ -38,6 +38,6 @@ export class InMemoryUserRepository implements IUserRepository {
 
   async delete(user: User): Promise<void> {
     const userIndex = this.repository.findIndex((item) => item.id === user.id);
-    this.repository.splice(userIndex, 1);
+    this.repository[userIndex].deletedAt = new Date();
   }
 }
