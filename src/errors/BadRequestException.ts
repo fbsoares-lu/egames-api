@@ -1,7 +1,7 @@
 import { AppError } from "./AppError";
 
 export class BadRequestException extends AppError {
-  constructor(message: string) {
-    super(message, 400);
+  constructor(message: string, error?: Object) {
+    super(message, 400, error);
   }
 }

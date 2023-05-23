@@ -3,7 +3,7 @@ import "express-async-errors";
 import cors from "cors";
 
 import { AppDataSource } from "./database";
-import { router } from "./routes";
+import { router } from "./infra/http/routes";
 import { AppError } from "./errors/AppError";
 
 AppDataSource.initialize().then(() => {
@@ -18,6 +18,8 @@ AppDataSource.initialize().then(() => {
       if (err instanceof AppError) {
         return response.status(err.statusCode).json({
           message: err.message,
+          status: err.statusCode,
+          error: err.error,
         });
       }
 
