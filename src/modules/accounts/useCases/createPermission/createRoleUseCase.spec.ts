@@ -19,7 +19,7 @@ describe("Create Permission", () => {
       description: "Create a permission",
     });
 
-    expect(imMemoryPermissionRepository.repository[0].name).toEqual("Admin");
+    expect(imMemoryPermissionRepository.repository[0].name).toEqual("Create");
   });
 
   it("should not be able to create a permission with the same name", async () => {

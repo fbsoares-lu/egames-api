@@ -9,7 +9,6 @@ import { Permission } from "../../modules/accounts/entities/Permission";
 import { CreateUsers1684434930536 } from "./migrations/1684434930536-CreateUsers";
 import { CreateRoles1684854327461 } from "./migrations/1684854327461-CreateRoles";
 import { CreatePermissions1684853466174 } from "./migrations/1684853466174-CreatePermissions";
-import { CreatePermissionsRoles1684854551724 } from "./migrations/1684854551724-CreatePermissionsRoles";
 import { CreateUsersRoles1684855025464 } from "./migrations/1684855025464-CreateUsersRoles";
 import { CreateUsersPermissions1684855131899 } from "./migrations/1684855131899-CreateUsersPermissions";
 
@@ -25,7 +24,6 @@ export const AppDataSource = new DataSource({
     CreateUsers1684434930536,
     CreatePermissions1684853466174,
     CreateRoles1684854327461,
-    CreatePermissionsRoles1684854551724,
     CreateUsersRoles1684855025464,
     CreateUsersPermissions1684855131899,
   ],

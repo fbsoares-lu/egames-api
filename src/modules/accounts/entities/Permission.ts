@@ -4,9 +4,12 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  ManyToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
+  JoinTable,
 } from "typeorm";
+import { User } from "./User";
 
 @Entity("permissions")
 export class Permission {
