@@ -3,16 +3,21 @@ import { Repository } from "typeorm";
 import { AppDataSource } from "../../../../infra/database";
 import { IRoleRepository } from "../IRoleRepository";
 import { Role } from "../../entities/Role";
-import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
+import { ICreateRoleDTO } from "../../dtos/ICreateRoleDTO";
 
-export class UserRepository implements IRoleRepository {
+export class RoleRepository implements IRoleRepository {
   private repository: Repository<Role>;
 
   constructor() {
     this.repository = AppDataSource.getRepository(Role);
   }
 
-  async create(role: ICreateUserDTO): Promise<void> {
+  async findByName(name: string): Promise<Role | null> {
+    const role = await this.repository.findOneBy({ name });
+    return role;
+  }
+
+  async create(role: ICreateRoleDTO): Promise<void> {
     await this.repository.save(role);
   }
 }

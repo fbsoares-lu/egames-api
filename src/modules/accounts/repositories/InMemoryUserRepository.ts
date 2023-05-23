@@ -1,5 +1,4 @@
 import {
-  IPaginationRequest,
   IPaginationResponse,
   PaginationResponse,
 } from "../../../helpers/PaginationResponse";
