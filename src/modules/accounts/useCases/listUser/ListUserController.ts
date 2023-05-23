@@ -5,9 +5,17 @@ export class ListUserController {
   constructor(private listUserUseCase: ListUserUseCase) {}
 
   public async handle(request: Request, response: Response) {
-    const users = await this.listUserUseCase.execute();
-    return response.status(200).json({
-      data: users,
+    const { page } = request.query;
+    const { pageSize }: { pageSize?: number } = request.query;
+
+    const convertPageToNumber = Number(page);
+    const convertPageSizeToNumber = Number(pageSize);
+
+    const responsePagination = await this.listUserUseCase.execute({
+      page: convertPageToNumber,
+      pageSize: convertPageSizeToNumber,
     });
+
+    return response.status(200).json(responsePagination);
   }
 }

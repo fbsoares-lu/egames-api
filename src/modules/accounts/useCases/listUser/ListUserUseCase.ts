@@ -1,5 +1,11 @@
+import { IPaginationResponse } from "../../../../helpers/PaginationResponse";
 import { User } from "../../entities/User";
 import { IUserRepository } from "../../repositories/IUserRepository";
+
+interface IRequest {
+  page?: number;
+  pageSize?: number;
+}
 
 export class ListUserUseCase {
   private userRepository: IUserRepository;
@@ -8,8 +14,14 @@ export class ListUserUseCase {
     this.userRepository = userRepository;
   }
 
-  public async execute(): Promise<User[]> {
-    const users = await this.userRepository.find();
-    return users;
+  public async execute({
+    page,
+    pageSize,
+  }: IRequest): Promise<IPaginationResponse> {
+    if (!page) page = 1;
+    if (!pageSize) pageSize = 10;
+
+    const paginationResponse = await this.userRepository.find(page, pageSize);
+    return paginationResponse;
   }
 }

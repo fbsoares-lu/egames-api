@@ -2,6 +2,10 @@ import { Repository } from "typeorm";
 import { AppDataSource } from "../../../../database";
 import { User } from "../../entities/User";
 import { IUserRepository } from "../IUserRepository";
+import {
+  IPaginationResponse,
+  PaginationResponse,
+} from "../../../../helpers/PaginationResponse";
 
 interface IUserFormData {
   name: string;
@@ -15,8 +19,18 @@ export class UserRepository implements IUserRepository {
     this.repository = AppDataSource.getRepository(User);
   }
 
-  async find(): Promise<User[]> {
-    return await this.repository.find();
+  async find(page: number, pageSize: number): Promise<IPaginationResponse> {
+    const [result, total] = await this.repository.findAndCount({
+      skip: (page - 1) * pageSize,
+      take: pageSize,
+    });
+
+    return PaginationResponse.handle({
+      data: result,
+      page,
+      total,
+      pageSize,
+    });
   }
 
   async findById(id: string): Promise<User | null> {
