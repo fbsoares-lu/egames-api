@@ -24,7 +24,10 @@ describe("List Users", () => {
       password: "123456",
     });
 
-    const users = await listUserUseCase.execute();
-    expect(users.length).toEqual(3);
+    const paginationResponse = await listUserUseCase.execute({
+      page: 1,
+      pageSize: 0,
+    });
+    expect(paginationResponse.total).toBe(3);
   });
 });

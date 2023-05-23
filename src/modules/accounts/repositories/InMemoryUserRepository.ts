@@ -1,3 +1,8 @@
+import {
+  IPaginationRequest,
+  IPaginationResponse,
+  PaginationResponse,
+} from "../../../helpers/PaginationResponse";
 import { User } from "../entities/User";
 import { IUserRepository } from "./IUserRepository";
 
@@ -13,9 +18,16 @@ export class InMemoryUserRepository implements IUserRepository {
     return user!;
   }
 
-  async find(): Promise<User[]> {
-    const user = this.repository;
-    return user;
+  async find(page: number, pageSize: number): Promise<IPaginationResponse> {
+    const users = this.repository;
+
+    const paginationResponse = PaginationResponse.handle({
+      data: users,
+      page,
+      pageSize,
+      total: users.length,
+    });
+    return paginationResponse;
   }
 
   async findById(id: string) {

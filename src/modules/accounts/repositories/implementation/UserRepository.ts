@@ -25,6 +25,8 @@ export class UserRepository implements IUserRepository {
       take: pageSize,
     });
 
+    console.log(total);
+
     return PaginationResponse.handle({
       data: result,
       page,
