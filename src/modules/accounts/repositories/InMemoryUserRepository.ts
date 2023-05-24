@@ -20,7 +20,9 @@ export class InMemoryUserRepository implements IUserRepository {
     roles: Role[],
     permissions: Permission[]
   ): Promise<void> {
-    throw new Error("Method not implemented.");
+    const userIndex = this.repository.findIndex((item) => item.id === user.id);
+    this.repository[userIndex].permissions = permissions;
+    this.repository[userIndex].roles = roles;
   }
 
   async findByEmail(email: string) {

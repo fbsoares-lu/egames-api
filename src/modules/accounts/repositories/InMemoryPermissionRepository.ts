@@ -9,7 +9,17 @@ export class InMemoryPermissionRepository implements IPermissionRepository {
     this.repository = [];
   }
   async findByIds(ids: string[]): Promise<Permission[]> {
-    throw new Error("Method not implemented.");
+    const permissionsFound: Permission[] = [];
+
+    for (var i = 0; i < ids.length; i++) {
+      for (var j = 0; j < this.repository.length; j++) {
+        if (this.repository[j].name === ids[i]) {
+          permissionsFound.push(this.repository[i]);
+        }
+      }
+    }
+
+    return permissionsFound;
   }
 
   async findByName(name: string): Promise<Permission | null> {
