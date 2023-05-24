@@ -9,6 +9,7 @@ import { CreateUserValidation } from "../validations/accounts/CreateUserValidati
 import { ResponseValidationBase } from "../validations/ResponseValidationBase";
 import { createUserAccessControlListController } from "../../../modules/accounts/useCases/createUserAccessControlList";
 import { ensuredAuthentication } from "../middlewares/ensuredAuthentication";
+import { can, is } from "../middlewares/permissions";
 
 const usersRoutes = Router();
 
@@ -20,6 +21,9 @@ usersRoutes.get("/:id", (request, response) => {
 });
 usersRoutes.post(
   "/",
+  ensuredAuthentication,
+  can(["create"]),
+  is(["employee"]),
   CreateUserValidation.handle(),
   (request: Request, response: Response) => {
     ResponseValidationBase.handle(request, response);

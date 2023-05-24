@@ -2,6 +2,7 @@ import {
   IPaginationResponse,
   PaginationResponse,
 } from "../../../helpers/PaginationResponse";
+import { ICreateUserDTO } from "../dtos/ICreateUserDTO";
 import { Permission } from "../entities/Permission";
 import { Role } from "../entities/Role";
 import { User } from "../entities/User";
@@ -44,9 +45,9 @@ export class InMemoryUserRepository implements IUserRepository {
     return user!;
   }
 
-  async create(payload: User): Promise<void> {
+  async create(payload: ICreateUserDTO): Promise<void> {
     this.repository.push(
-      new User(payload.name, payload.email, payload.password)
+      new User(payload.name, payload.email, payload.password!)
     );
   }
 
