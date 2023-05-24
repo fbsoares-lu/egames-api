@@ -4,4 +4,5 @@ import { Role } from "../entities/Role";
 export abstract class IRoleRepository {
   abstract create(role: ICreateRoleDTO): Promise<void>;
   abstract findByName(name: string): Promise<Role | null>;
+  abstract findByIds(ids: string[]): Promise<Role[]>;
 }

@@ -6,6 +6,8 @@ import {
   IPaginationResponse,
   PaginationResponse,
 } from "../../../../helpers/PaginationResponse";
+import { Role } from "../../entities/Role";
+import { Permission } from "../../entities/Permission";
 
 interface IUserFormData {
   name: string;
@@ -25,8 +27,6 @@ export class UserRepository implements IUserRepository {
       take: pageSize,
     });
 
-    console.log(total);
-
     return PaginationResponse.handle({
       data: result,
       page,
@@ -36,7 +36,10 @@ export class UserRepository implements IUserRepository {
   }
 
   async findById(id: string): Promise<User | null> {
-    const user = await this.repository.findOne({ where: { id } });
+    const user = await this.repository.findOne({
+      where: { id },
+      relations: ["permissions", "roles"],
+    });
     return user;
   }
 
@@ -59,6 +62,18 @@ export class UserRepository implements IUserRepository {
     await this.repository.save(user);
     return user;
   }
+
+  async save(
+    user: User,
+    roles: Role[],
+    permissions: Permission[]
+  ): Promise<void> {
+    user.permissions = permissions;
+    user.roles = roles;
+
+    await this.repository.save(user);
+  }
+
   async delete(user: User): Promise<void> {
     user.deletedAt = new Date();
     await this.repository.save(user);

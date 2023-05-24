@@ -7,6 +7,8 @@ import { listUserController } from "../../../modules/accounts/useCases/listUser"
 import { showUserController } from "../../../modules/accounts/useCases/showUser";
 import { CreateUserValidation } from "../validations/accounts/CreateUserValidation";
 import { ResponseValidationBase } from "../validations/ResponseValidationBase";
+import { createUserAccessControlListController } from "../../../modules/accounts/useCases/createUserAccessControlList";
+import { ensuredAuthentication } from "../middlewares/ensuredAuthentication";
 
 const usersRoutes = Router();
 
@@ -29,6 +31,9 @@ usersRoutes.put("/:id", (request, response) => {
 });
 usersRoutes.delete("/:id", (request, response) => {
   return deleteUserController.handle(request, response);
+});
+usersRoutes.post("/:id/acl", ensuredAuthentication, (request, response) => {
+  return createUserAccessControlListController.handle(request, response);
 });
 
 export { usersRoutes };

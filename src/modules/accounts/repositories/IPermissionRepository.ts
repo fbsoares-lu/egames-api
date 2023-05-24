@@ -4,4 +4,5 @@ import { Permission } from "../entities/Permission";
 export abstract class IPermissionRepository {
   abstract create(permission: ICreatePermissionDTO): Promise<void>;
   abstract findByName(name: string): Promise<Permission | null>;
+  abstract findByIds(ids: string[]): Promise<Permission[]>;
 }

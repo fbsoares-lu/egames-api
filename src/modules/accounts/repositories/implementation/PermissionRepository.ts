@@ -1,4 +1,4 @@
-import { Repository } from "typeorm";
+import { In, Repository } from "typeorm";
 
 import { AppDataSource } from "../../../../infra/database";
 import { ICreatePermissionDTO } from "../../dtos/ICreatePermissionDTO";
@@ -19,5 +19,10 @@ export class PermissionRepository implements IPermissionRepository {
 
   async create(permission: ICreatePermissionDTO): Promise<void> {
     await this.repository.save(permission);
+  }
+
+  async findByIds(ids: string[]): Promise<Permission[]> {
+    const permissions = await this.repository.findBy({ id: In(ids) });
+    return permissions;
   }
 }

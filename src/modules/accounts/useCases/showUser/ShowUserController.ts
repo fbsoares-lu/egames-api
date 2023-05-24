@@ -17,6 +17,8 @@ export class ShowUserController {
         createdAt: user.createdAt,
         updatedAt: user.updatedAt,
         deletedAt: user.deletedAt,
+        permissions: user.permissions,
+        roles: user.roles,
       },
     });
   }

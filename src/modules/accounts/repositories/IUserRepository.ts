@@ -1,4 +1,6 @@
 import { IPaginationResponse } from "../../../helpers/PaginationResponse";
+import { Permission } from "../entities/Permission";
+import { Role } from "../entities/Role";
 import { User } from "../entities/User";
 
 interface IUserFormData {
@@ -13,4 +15,9 @@ export abstract class IUserRepository {
   abstract create(user: User): Promise<void>;
   abstract update(user: User, payload: IUserFormData): Promise<User>;
   abstract delete(user: User): Promise<void>;
+  abstract save(
+    user: User,
+    roles: Role[],
+    permissions: Permission[]
+  ): Promise<void>;
 }

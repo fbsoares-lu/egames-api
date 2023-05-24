@@ -1,4 +1,4 @@
-import { Repository } from "typeorm";
+import { In, Repository } from "typeorm";
 
 import { AppDataSource } from "../../../../infra/database";
 import { IRoleRepository } from "../IRoleRepository";
@@ -15,6 +15,11 @@ export class RoleRepository implements IRoleRepository {
   async findByName(name: string): Promise<Role | null> {
     const role = await this.repository.findOneBy({ name });
     return role;
+  }
+
+  async findByIds(ids: string[]): Promise<Role[]> {
+    const roles = await this.repository.findBy({ id: In(ids) });
+    return roles;
   }
 
   async create(role: ICreateRoleDTO): Promise<void> {
