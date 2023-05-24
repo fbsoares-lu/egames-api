@@ -9,6 +9,10 @@ export class InMemoryRoleRepository implements IRoleRepository {
     this.repository = [];
   }
 
+  async findByIds(ids: string[]): Promise<Role[]> {
+    throw new Error("Method not implemented.");
+  }
+
   async findByName(name: string): Promise<Role | null> {
     const role = this.repository.find((item) => item.name === name);
     return role ?? null;

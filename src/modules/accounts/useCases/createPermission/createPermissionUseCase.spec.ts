@@ -1,13 +1,13 @@
 import { BadRequestException } from "../../../../errors/BadRequestException";
-import { InMemoryRoleRepository } from "../../repositories/InMemoryRoleRepository";
+import { InMemoryPermissionRepository } from "../../repositories/InMemoryPermissionRepository";
 import { CreatePermissionUseCase } from "./CreatePermissionUseCase";
 
-let imMemoryPermissionRepository: InMemoryRoleRepository;
+let imMemoryPermissionRepository: InMemoryPermissionRepository;
 let createPermissionUseCase: CreatePermissionUseCase;
 
 describe("Create Permission", () => {
   beforeEach(() => {
-    imMemoryPermissionRepository = new InMemoryRoleRepository();
+    imMemoryPermissionRepository = new InMemoryPermissionRepository();
     createPermissionUseCase = new CreatePermissionUseCase(
       imMemoryPermissionRepository
     );

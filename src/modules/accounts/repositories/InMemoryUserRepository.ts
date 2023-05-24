@@ -2,6 +2,8 @@ import {
   IPaginationResponse,
   PaginationResponse,
 } from "../../../helpers/PaginationResponse";
+import { Permission } from "../entities/Permission";
+import { Role } from "../entities/Role";
 import { User } from "../entities/User";
 import { IUserRepository } from "./IUserRepository";
 
@@ -10,6 +12,14 @@ export class InMemoryUserRepository implements IUserRepository {
 
   constructor() {
     this.repository = [];
+  }
+
+  async save(
+    user: User,
+    roles: Role[],
+    permissions: Permission[]
+  ): Promise<void> {
+    throw new Error("Method not implemented.");
   }
 
   async findByEmail(email: string) {

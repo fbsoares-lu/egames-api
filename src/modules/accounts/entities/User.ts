@@ -52,7 +52,7 @@ export class User {
     joinColumns: [{ name: "user_id" }],
     inverseJoinColumns: [{ name: "role_id" }],
   })
-  roles: Role[];
+  roles?: Role[];
 
   @ManyToMany(() => Permission)
   @JoinTable({
@@ -60,5 +60,5 @@ export class User {
     joinColumns: [{ name: "user_id" }],
     inverseJoinColumns: [{ name: "permission_id" }],
   })
-  permissions: Permission[];
+  permissions?: Permission[];
 }
