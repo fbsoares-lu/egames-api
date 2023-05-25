@@ -4,13 +4,17 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
   JoinTable,
   ManyToMany,
+  OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { Permission } from "./Permission";
 import { Role } from "./Role";
+import { File } from "../../files/entities/File";
 
 @Entity("users")
 export class User {
@@ -61,4 +65,11 @@ export class User {
     inverseJoinColumns: [{ name: "permission_id" }],
   })
   permissions: Permission[];
+
+  @OneToOne(() => File)
+  @JoinColumn({
+    name: "file_id",
+    referencedColumnName: "id",
+  })
+  file: File;
 }

@@ -1,15 +1,15 @@
 import { randomUUID } from "crypto";
 import {
   Column,
+  PrimaryGeneratedColumn,
   CreateDateColumn,
+  UpdateDateColumn,
   DeleteDateColumn,
   Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
 } from "typeorm";
 
-@Entity("permissions")
-export class Permission {
+@Entity("files")
+export class File {
   @PrimaryGeneratedColumn("uuid")
   public id?: string;
 
@@ -17,7 +17,7 @@ export class Permission {
   public name: string;
 
   @Column()
-  public description: string;
+  public path: string;
 
   @CreateDateColumn({ name: "created_at" })
   public createdAt?: Date;
@@ -28,10 +28,10 @@ export class Permission {
   @DeleteDateColumn({ name: "deleted_at" })
   public deletedAt?: Date | null;
 
-  constructor(name: string, description: string) {
+  constructor(name: string, path: string) {
     this.id = randomUUID();
     this.name = name;
-    this.description = description;
+    this.path = path;
     this.createdAt = new Date();
     this.updatedAt = new Date();
 
