@@ -1,9 +1,9 @@
 import { FileRepository } from "../../repositories/implementation/FileRepository";
-import { CreateFileController } from "./UploadFileController";
-import { CreateFileUseCase } from "./UploadFileUsingAWSUseCase";
+import { UploadFileController } from "./UploadFileController";
+import { UploadFileUsingAWSUseCase } from "./UploadFileUsingAWSUseCase";
 
 const fileRepository = new FileRepository();
-const createFileUseCase = new CreateFileUseCase(fileRepository);
-const createFileController = new CreateFileController(createFileUseCase);
+const uploadFileUseCase = new UploadFileUsingAWSUseCase(fileRepository);
+const uploadFileController = new UploadFileController(uploadFileUseCase);
 
-export { createFileController };
+export { uploadFileController };

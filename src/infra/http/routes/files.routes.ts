@@ -1,12 +1,12 @@
 import multer from "multer";
 import { Router } from "express";
+import { uploadFileController } from "../../../modules/files/useCases/uploadFile";
 
-import { createFileController } from "../../../modules/files/useCases/CreateFile";
 const filesRoutes = Router();
 const upload = multer({ dest: "./tmp" });
 
 filesRoutes.post("/", upload.single("file"), (request, response) => {
-  return createFileController.handle(request, response);
+  return uploadFileController.handle(request, response);
 });
 
 export { filesRoutes };
