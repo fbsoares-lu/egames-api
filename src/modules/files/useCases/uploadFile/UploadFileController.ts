@@ -8,12 +8,17 @@ export class UploadFileController {
     this.uploadFileUseCase = uploadFileUseCase;
   }
 
-  public handle(request: Request, response: Response) {
-    const { file }: any = request;
-    const { name } = request.body;
+  public async handle(request: Request, response: Response) {
+    const file = request.file;
+    const name = request.body;
 
-    console.log({ file, name });
+    const fileFormatted = file as Express.Multer.File;
 
-    return response.status(200).send();
+    const payload = await this.uploadFileUseCase.execute({
+      name,
+      file: fileFormatted,
+    });
+
+    return response.status(200).json(payload);
   }
 }

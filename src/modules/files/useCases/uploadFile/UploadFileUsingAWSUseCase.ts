@@ -1,4 +1,4 @@
-import { CreateBucketCommand, S3Client } from "@aws-sdk/client-s3";
+import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 
 import { File } from "../../entities/File";
 import { IFileRepository } from "../../repositories/IFileRepository";
@@ -6,7 +6,7 @@ import { IUploadFileUseCase } from "./IUploadFileUseCase";
 
 interface IRequest {
   name: string;
-  path: string;
+  file: any;
 }
 
 export class UploadFileUsingAWSUseCase implements IUploadFileUseCase {
@@ -16,25 +16,30 @@ export class UploadFileUsingAWSUseCase implements IUploadFileUseCase {
     this.fileRepository = fileRepository;
   }
 
-  async execute({ name, path }: IRequest): Promise<File> {
-    const s3Client = new S3Client({ region: process.env.AWS_REGION });
+  async execute({ name, file }: IRequest): Promise<File> {
+    const s3Client = new S3Client({
+      region: process.env.AWS_REGION,
+      credentials: {
+        accessKeyId: String(process.env.AWS_ACCESS_KEY_ID),
+        secretAccessKey: String(process.env.AWS_SECRET_ACCESS_KEY),
+      },
+    });
 
     const params = {
-      Bucket: process.env.AWS_BUCKET,
-      Key: process.env.AWS_KEY,
+      Bucket: process.env.AWS_BUCKET_NAME,
+      Key: file.originalname,
+      Body: file.buffer,
+      ACL: "public-read",
     };
 
-    const data = await s3Client.send(
-      new CreateBucketCommand({ Bucket: params.Bucket })
-    );
+    await s3Client.send(new PutObjectCommand(params));
+    const path = `https://${params.Bucket}.s3.amazonaws.com/${params.Key}`;
 
-    console.log(data);
-
-    const file = await this.fileRepository.create({
+    const reponse = await this.fileRepository.create({
       name,
       path,
     });
 
-    return file;
+    return reponse;
   }
 }
