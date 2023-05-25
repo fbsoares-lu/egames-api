@@ -14,10 +14,13 @@ export class File {
   public id?: string;
 
   @Column()
-  public name: string;
+  public path: string;
+
+  @Column({ name: "original_name" })
+  public originalName: string;
 
   @Column()
-  public path: string;
+  public type: string;
 
   @CreateDateColumn({ name: "created_at" })
   public createdAt?: Date;
@@ -28,10 +31,11 @@ export class File {
   @DeleteDateColumn({ name: "deleted_at" })
   public deletedAt?: Date | null;
 
-  constructor(name: string, path: string) {
+  constructor(path: string, originalName: string, type: string) {
     this.id = randomUUID();
-    this.name = name;
     this.path = path;
+    this.type = type;
+    this.originalName = originalName;
     this.createdAt = new Date();
     this.updatedAt = new Date();
 

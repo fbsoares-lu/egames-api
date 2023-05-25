@@ -14,6 +14,7 @@ import { CreateUsersRoles1684855025464 } from "./migrations/1684855025464-Create
 import { CreateUsersPermissions1684855131899 } from "./migrations/1684855131899-CreateUsersPermissions";
 import { CreateFile1684967371536 } from "./migrations/1684967371536-CreateFile";
 import { AddColumnFileIdToUsersTable1684967842251 } from "./migrations/1684967842251-AddColumnFileIdToUsersTable";
+import { UpdateFileColumns1685021581745 } from "./migrations/1685021581745-UpdateFileColumns";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -31,5 +32,6 @@ export const AppDataSource = new DataSource({
     CreateUsersPermissions1684855131899,
     CreateFile1684967371536,
     AddColumnFileIdToUsersTable1684967842251,
+    UpdateFileColumns1685021581745,
   ],
 });

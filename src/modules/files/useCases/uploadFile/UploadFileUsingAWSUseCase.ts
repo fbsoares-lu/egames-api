@@ -5,8 +5,7 @@ import { IFileRepository } from "../../repositories/IFileRepository";
 import { IUploadFileUseCase } from "./IUploadFileUseCase";
 
 interface IRequest {
-  name: string;
-  file: any;
+  file: Express.Multer.File;
 }
 
 export class UploadFileUsingAWSUseCase implements IUploadFileUseCase {
@@ -16,7 +15,7 @@ export class UploadFileUsingAWSUseCase implements IUploadFileUseCase {
     this.fileRepository = fileRepository;
   }
 
-  async execute({ name, file }: IRequest): Promise<File> {
+  async execute({ file }: IRequest): Promise<File> {
     const s3Client = new S3Client({
       region: process.env.AWS_REGION,
       credentials: {
@@ -36,8 +35,9 @@ export class UploadFileUsingAWSUseCase implements IUploadFileUseCase {
     const path = `https://${params.Bucket}.s3.amazonaws.com/${params.Key}`;
 
     const reponse = await this.fileRepository.create({
-      name,
       path,
+      originalName: file.originalname,
+      type: file.mimetype,
     });
 
     return reponse;

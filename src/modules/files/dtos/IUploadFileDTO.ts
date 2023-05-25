@@ -1,4 +1,5 @@
 export interface IUploadFileDTO {
-  name: string;
   path: string;
+  originalName: string;
+  type: string;
 }

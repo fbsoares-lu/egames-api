@@ -10,12 +10,9 @@ export class UploadFileController {
 
   public async handle(request: Request, response: Response) {
     const file = request.file;
-    const name = request.body;
-
     const fileFormatted = file as Express.Multer.File;
 
     const payload = await this.uploadFileUseCase.execute({
-      name,
       file: fileFormatted,
     });
 
