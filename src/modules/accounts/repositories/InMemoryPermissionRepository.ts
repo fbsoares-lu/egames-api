@@ -23,8 +23,8 @@ export class InMemoryPermissionRepository implements IPermissionRepository {
   }
 
   async findByName(name: string): Promise<Permission | null> {
-    const role = this.repository.find((item) => item.name === name);
-    return role ?? null;
+    const permission = this.repository.find((item) => item.name === name);
+    return permission ?? null;
   }
 
   async create(role: ICreateRoleDTO): Promise<void> {

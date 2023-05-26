@@ -68,6 +68,9 @@ export class User {
   permissions: Permission[];
 
   @OneToOne(() => Profile, (profile) => profile.user)
-  @JoinColumn()
+  @JoinColumn({
+    name: "profile_id",
+    referencedColumnName: "id",
+  })
   profile: Profile;
 }

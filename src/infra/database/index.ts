@@ -18,6 +18,9 @@ import { UpdateFileColumns1685021581745 } from "./migrations/1685021581745-Updat
 import { CreateProfiles1685068911076 } from "./migrations/1685068911076-CreateProfiles";
 import { CreateSocialNetworkTypes1685070133485 } from "./migrations/1685070133485-CreateSocialNetworkTypes";
 import { CreateSocialNetworks1685070142131 } from "./migrations/1685070142131-CreateSocialNetworks";
+import { SocialNetwork } from "../../modules/accounts/entities/SocialNetwork";
+import { SocialNetworkType } from "../../modules/accounts/entities/SocialNetworkType";
+import { AddProfileIdToUsers1685129751747 } from "./migrations/1685129751747-AddProfileIdToUsers";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -26,7 +29,15 @@ export const AppDataSource = new DataSource({
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD as string,
   database: process.env.DB_NAME,
-  entities: [User, Permission, Role, File, Profile],
+  entities: [
+    User,
+    Permission,
+    Role,
+    File,
+    Profile,
+    SocialNetwork,
+    SocialNetworkType,
+  ],
   migrations: [
     CreateUsers1684434930536,
     CreatePermissions1684853466174,
@@ -38,5 +49,6 @@ export const AppDataSource = new DataSource({
     CreateProfiles1685068911076,
     CreateSocialNetworkTypes1685070133485,
     CreateSocialNetworks1685070142131,
+    AddProfileIdToUsers1685129751747,
   ],
 });
