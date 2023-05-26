@@ -29,7 +29,7 @@ export class UpdateFileColumns1685021581745 implements MigrationInterface {
       new TableColumn({
         name: "name",
         type: "varchar",
-        isNullable: false,
+        isNullable: true,
       })
     );
   }

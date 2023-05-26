@@ -15,6 +15,7 @@ import {
 import { Permission } from "./Permission";
 import { Role } from "./Role";
 import { File } from "../../files/entities/File";
+import { Profile } from "./Profile";
 
 @Entity("users")
 export class User {
@@ -66,10 +67,7 @@ export class User {
   })
   permissions: Permission[];
 
-  @OneToOne(() => File)
-  @JoinColumn({
-    name: "file_id",
-    referencedColumnName: "id",
-  })
-  file: File;
+  @OneToOne(() => Profile, (profile) => profile.user)
+  @JoinColumn()
+  profile: Profile;
 }
