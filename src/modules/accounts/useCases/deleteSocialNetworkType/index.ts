@@ -6,8 +6,8 @@ const socialNetworkTypeRepository = new SocialNetworkTypeRepository();
 const deleteSocialNetworkTypeUseCase = new DeleteSocialNetworkTypeUseCase(
   socialNetworkTypeRepository
 );
-const deleteSocialNetworkController = new DeleteSocialNetworkTypeController(
+const deleteSocialNetworkTypeController = new DeleteSocialNetworkTypeController(
   deleteSocialNetworkTypeUseCase
 );
 
-export { deleteSocialNetworkController };
+export { deleteSocialNetworkTypeController };

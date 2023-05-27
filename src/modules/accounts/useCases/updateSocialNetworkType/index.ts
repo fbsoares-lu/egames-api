@@ -6,8 +6,8 @@ const socialNetworkTypeRepository = new SocialNetworkTypeRepository();
 const updateSocialNetworkTypeUseCase = new UpdateSocialNetworkTypeUseCase(
   socialNetworkTypeRepository
 );
-const updateSocialNetworkController = new UpdateSocialNetworkTypeController(
+const updateSocialNetworkTypeController = new UpdateSocialNetworkTypeController(
   updateSocialNetworkTypeUseCase
 );
 
-export { updateSocialNetworkController };
+export { updateSocialNetworkTypeController };

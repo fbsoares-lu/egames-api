@@ -6,8 +6,8 @@ const socialNetworkTypeRepository = new SocialNetworkTypeRepository();
 const createSocialNetworkTypeUseCase = new CreateSocialNetworkTypeUseCase(
   socialNetworkTypeRepository
 );
-const createSocialNetworkController = new CreateSocialNetworkTypeController(
+const createSocialNetworkTypeController = new CreateSocialNetworkTypeController(
   createSocialNetworkTypeUseCase
 );
 
-export { createSocialNetworkController };
+export { createSocialNetworkTypeController };

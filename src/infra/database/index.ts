@@ -21,6 +21,7 @@ import { CreateSocialNetworks1685070142131 } from "./migrations/1685070142131-Cr
 import { SocialNetwork } from "../../modules/accounts/entities/SocialNetwork";
 import { SocialNetworkType } from "../../modules/accounts/entities/SocialNetworkType";
 import { AddProfileIdToUsers1685129751747 } from "./migrations/1685129751747-AddProfileIdToUsers";
+import { AddProfileIdInSocialNetworks1685149053699 } from "./migrations/1685149053699-AddProfileIdInSocialNetworks";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -50,5 +51,6 @@ export const AppDataSource = new DataSource({
     CreateSocialNetworkTypes1685070133485,
     CreateSocialNetworks1685070142131,
     AddProfileIdToUsers1685129751747,
+    AddProfileIdInSocialNetworks1685149053699,
   ],
 });

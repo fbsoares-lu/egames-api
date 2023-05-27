@@ -8,8 +8,10 @@ import {
   DeleteDateColumn,
   OneToOne,
   JoinColumn,
+  ManyToOne,
 } from "typeorm";
 import { SocialNetworkType } from "./SocialNetworkType";
+import { Profile } from "./Profile";
 
 @Entity("social_networks")
 export class SocialNetwork {
@@ -28,9 +30,15 @@ export class SocialNetwork {
   @DeleteDateColumn({ name: "deleted_at" })
   public deletedAt?: Date | null;
 
-  constructor(socialNetworkUrl: string) {
+  constructor(
+    socialNetworkUrl: string,
+    socialNetworkType: SocialNetworkType,
+    profile: Profile
+  ) {
     this.id = randomUUID();
+    this.profile = profile;
     this.socialNetworkUrl = socialNetworkUrl;
+    this.socialNetworkType = socialNetworkType;
     this.createdAt = new Date();
     this.updatedAt = new Date();
 
@@ -42,5 +50,8 @@ export class SocialNetwork {
     name: "social_network_type_id",
     referencedColumnName: "id",
   })
-  socialNetWorkType: SocialNetworkType;
+  socialNetworkType: SocialNetworkType;
+
+  @ManyToOne(() => Profile, (profile) => profile.socialNetworks)
+  profile: Profile;
 }

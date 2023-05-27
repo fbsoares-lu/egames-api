@@ -14,6 +14,7 @@ import { Permission } from "./Permission";
 import { Role } from "./Role";
 import { File } from "../../files/entities/File";
 import { User } from "./User";
+import { SocialNetwork } from "./SocialNetwork";
 
 @Entity("profiles")
 export class Profile {
@@ -32,9 +33,11 @@ export class Profile {
   @DeleteDateColumn({ name: "deleted_at" })
   public deletedAt?: Date | null;
 
-  constructor(bio: string) {
+  constructor(bio: string, file: File, user: User) {
     this.id = randomUUID();
     this.bio = bio;
+    this.file = file;
+    this.user = user;
     this.createdAt = new Date();
     this.updatedAt = new Date();
 
@@ -54,4 +57,7 @@ export class Profile {
     referencedColumnName: "id",
   })
   user: User;
+
+  @OneToMany(() => SocialNetwork, (socialNetwork) => socialNetwork.profile)
+  socialNetworks: SocialNetwork[];
 }
