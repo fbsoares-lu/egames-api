@@ -2,6 +2,7 @@ import { ICreateSocialNetworkDTO } from "../dtos/ICreateSocialNetworkDTO";
 import { SocialNetwork } from "../entities/SocialNetwork";
 
 export abstract class ISocialNetworkRepository {
+  abstract find(): Promise<SocialNetwork[]>;
   abstract findById(id: string): Promise<SocialNetwork | null>;
   abstract findByUrl(url: string): Promise<SocialNetwork | null>;
   abstract create(data: SocialNetwork): Promise<void>;

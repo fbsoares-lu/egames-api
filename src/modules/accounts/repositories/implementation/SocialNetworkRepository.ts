@@ -11,6 +11,10 @@ export class SocialNetworkRepository implements ISocialNetworkRepository {
     this.repository = AppDataSource.getRepository(SocialNetwork);
   }
 
+  async find(): Promise<SocialNetwork[]> {
+    return await this.repository.find();
+  }
+
   async findByUrl(url: string): Promise<SocialNetwork | null> {
     return await this.repository.findOneBy({ socialNetworkUrl: url });
   }

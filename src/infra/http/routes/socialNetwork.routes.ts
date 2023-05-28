@@ -1,55 +1,45 @@
 import { Router, Request, Response } from "express";
 
-import { listSocialNetworkTypeController } from "../../../modules/accounts/useCases/listSocialNetworkType";
 import { ensuredAuthentication } from "../middlewares/ensuredAuthentication";
 import { is } from "../middlewares/permissions";
-import { CreateSocialNetworkTypeValidation } from "../validations/accounts/CreateSocialNetworkTypeValidation";
 import { ResponseValidationBase } from "../validations/ResponseValidationBase";
-import { createSocialNetworkTypeController } from "../../../modules/accounts/useCases/createSocialNetworkType";
+import { createSocialNetworkController } from "../../../modules/accounts/useCases/createSocialNetwork";
 import { UpdateSocialNetworkTypeValidation } from "../validations/accounts/UpdateSocialNetworkTypeValidation";
-import { updateSocialNetworkTypeController } from "../../../modules/accounts/useCases/updateSocialNetworkType";
-import { deleteSocialNetworkTypeController } from "../../../modules/accounts/useCases/deleteSocialNetworkType";
+import { updateSocialNetworkController } from "../../../modules/accounts/useCases/updateSocialNetwork";
+import { deleteSocialNetworkController } from "../../../modules/accounts/useCases/deleteSocialNetwork";
+import { ensuredCanChangeSocialNetwork } from "../middlewares/ensuredCanChangeSocialNetwork";
 
-const socialNetworkTypesRoutes = Router();
+const socialNetworksRoutes = Router();
 
-socialNetworkTypesRoutes.get(
+socialNetworksRoutes.post(
   "/",
   ensuredAuthentication,
-  is(["admin"]),
+  is(["admin", "customer"]),
   (request: Request, response: Response) => {
-    return listSocialNetworkTypeController.handle(request, response);
+    return createSocialNetworkController.handle(request, response);
   }
 );
 
-socialNetworkTypesRoutes.post(
-  "/",
-  ensuredAuthentication,
-  is(["admin"]),
-  CreateSocialNetworkTypeValidation.handle(),
-  (request: Request, response: Response) => {
-    ResponseValidationBase.handle(request, response);
-    return createSocialNetworkTypeController.handle(request, response);
-  }
-);
-
-socialNetworkTypesRoutes.put(
+socialNetworksRoutes.put(
   "/:id",
   ensuredAuthentication,
-  is(["admin"]),
+  ensuredCanChangeSocialNetwork,
+  is(["admin", "customer"]),
   UpdateSocialNetworkTypeValidation.handle(),
   (request: Request, response: Response) => {
     ResponseValidationBase.handle(request, response);
-    return updateSocialNetworkTypeController.handle(request, response);
+    return updateSocialNetworkController.handle(request, response);
   }
 );
 
-socialNetworkTypesRoutes.delete(
+socialNetworksRoutes.delete(
   "/:id",
   ensuredAuthentication,
-  is(["admin"]),
+  ensuredCanChangeSocialNetwork,
+  is(["admin", "customer"]),
   (request: Request, response: Response) => {
-    return deleteSocialNetworkTypeController.handle(request, response);
+    return deleteSocialNetworkController.handle(request, response);
   }
 );
 
-export { socialNetworkTypesRoutes };
+export { socialNetworksRoutes };

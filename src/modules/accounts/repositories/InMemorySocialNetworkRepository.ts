@@ -11,6 +11,10 @@ export class InMemorySocialNetworkRepository
     this.repository = [];
   }
 
+  async find(): Promise<SocialNetwork[]> {
+    return this.repository;
+  }
+
   async findByUrl(url: string): Promise<SocialNetwork | null> {
     const socialNetwork = this.repository.find(
       (item) => item.socialNetworkUrl === url
