@@ -12,6 +12,11 @@ export class FileRepository implements IFileRepository {
     this.repository = AppDataSource.getRepository(File);
   }
 
+  async findById(id: string): Promise<File | null> {
+    const file = await this.repository.findOneBy({ id });
+    return file;
+  }
+
   async create(payload: IUploadFileDTO): Promise<File> {
     const file = this.repository.create(payload);
 
