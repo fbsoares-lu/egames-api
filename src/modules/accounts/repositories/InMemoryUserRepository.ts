@@ -4,6 +4,7 @@ import {
 } from "../../../helpers/PaginationResponse";
 import { ICreateUserDTO } from "../dtos/ICreateUserDTO";
 import { Permission } from "../entities/Permission";
+import { Profile } from "../entities/Profile";
 import { Role } from "../entities/Role";
 import { User } from "../entities/User";
 import { IUserRepository } from "./IUserRepository";
@@ -58,6 +59,11 @@ export class InMemoryUserRepository implements IUserRepository {
 
     this.repository[userIndex] = payload;
     return this.repository[userIndex];
+  }
+
+  async saveProfile(user: User, profile: Profile): Promise<void> {
+    const userIndex = this.repository.findIndex((item) => item.id === user.id);
+    this.repository[userIndex].profile = profile;
   }
 
   async delete(user: User): Promise<void> {

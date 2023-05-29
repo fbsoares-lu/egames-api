@@ -19,6 +19,7 @@ export class ShowUserController {
         deletedAt: user.deletedAt,
         permissions: user.permissions,
         roles: user.roles,
+        profile: user.profile,
       },
     });
   }

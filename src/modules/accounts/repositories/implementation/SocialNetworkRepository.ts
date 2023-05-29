@@ -22,6 +22,7 @@ export class SocialNetworkRepository implements ISocialNetworkRepository {
   async findById(id: string): Promise<SocialNetwork | null> {
     return await this.repository.findOne({
       where: { id },
+      relations: ["profile"],
     });
   }
 

@@ -5,7 +5,8 @@ export class CreateProfileController {
   constructor(private createProfileUseCase: CreateProfileUseCase) {}
 
   public async handle(request: Request, response: Response) {
-    const { bio, userId, fileId } = request.body;
+    const { bio, fileId } = request.body;
+    const { userId } = request;
 
     await this.createProfileUseCase.execute({
       bio,

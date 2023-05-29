@@ -8,6 +8,7 @@ import {
 } from "../../../../helpers/PaginationResponse";
 import { Role } from "../../entities/Role";
 import { Permission } from "../../entities/Permission";
+import { Profile } from "../../entities/Profile";
 
 interface IUserFormData {
   name: string;
@@ -38,7 +39,7 @@ export class UserRepository implements IUserRepository {
   async findById(id: string): Promise<User | null> {
     const user = await this.repository.findOne({
       where: { id },
-      relations: ["permissions", "roles"],
+      relations: ["permissions", "roles", "profile", "profile.file"],
     });
     return user;
   }
@@ -76,6 +77,11 @@ export class UserRepository implements IUserRepository {
 
   async delete(user: User): Promise<void> {
     user.deletedAt = new Date();
+    await this.repository.save(user);
+  }
+
+  async saveProfile(user: User, profile: Profile): Promise<void> {
+    user.profile = profile;
     await this.repository.save(user);
   }
 }

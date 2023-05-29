@@ -1,5 +1,6 @@
 import { IPaginationResponse } from "../../../helpers/PaginationResponse";
 import { Permission } from "../entities/Permission";
+import { Profile } from "../entities/Profile";
 import { Role } from "../entities/Role";
 import { User } from "../entities/User";
 
@@ -20,4 +21,5 @@ export abstract class IUserRepository {
     roles: Role[],
     permissions: Permission[]
   ): Promise<void>;
+  abstract saveProfile(user: User, profile: Profile): Promise<void>;
 }

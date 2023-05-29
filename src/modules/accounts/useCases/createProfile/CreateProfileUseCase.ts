@@ -3,6 +3,7 @@ import { Profile } from "../../entities/Profile";
 import { IFileRepository } from "../../../files/repositories/IFileRepository";
 import { IUserRepository } from "../../repositories/IUserRepository";
 import { NotFoundException } from "../../../../errors/NotFoundException";
+import { BadRequestException } from "../../../../errors/BadRequestException";
 
 interface IRequest {
   bio: string;
@@ -38,7 +39,12 @@ export class CreateProfileUseCase {
       throw new NotFoundException("user not found!");
     }
 
+    if (user.profile) {
+      throw new BadRequestException("user already has a profile!");
+    }
+
     const profile = new Profile(bio, file, user);
     await this.profileRepository.create(profile);
+    await this.userRepository.saveProfile(user, profile);
   }
 }

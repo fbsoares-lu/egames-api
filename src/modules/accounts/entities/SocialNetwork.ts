@@ -53,5 +53,9 @@ export class SocialNetwork {
   socialNetworkType: SocialNetworkType;
 
   @ManyToOne(() => Profile, (profile) => profile.socialNetworks)
+  @JoinColumn({
+    name: "profile_id",
+    referencedColumnName: "id",
+  })
   profile: Profile;
 }
