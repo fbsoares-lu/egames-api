@@ -48,7 +48,7 @@ export class UpdateSocialNetworkUseCase {
     if (user.profile.socialNetworks) {
       const userAlreadyOwnsThisSocialNetworkType =
         user.profile.socialNetworks.find(
-          (item) => item.socialNetworkType === socialNetWorkType
+          (item) => item.socialNetworkType.id === socialNetworkTypeId
         );
 
       if (userAlreadyOwnsThisSocialNetworkType) {

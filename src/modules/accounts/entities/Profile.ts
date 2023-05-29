@@ -59,5 +59,8 @@ export class Profile {
   user: User;
 
   @OneToMany(() => SocialNetwork, (socialNetwork) => socialNetwork.profile)
+  @JoinColumn({
+    foreignKeyConstraintName: "fk_profile_id_social_network",
+  })
   socialNetworks: SocialNetwork[];
 }

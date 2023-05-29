@@ -14,7 +14,7 @@ export class ProfileRepository implements IProfileRepository {
   async findById(id: string): Promise<Profile | null> {
     return await this.repository.findOne({
       where: { id },
-      relations: ["user", "file"],
+      relations: ["user"],
     });
   }
 

@@ -39,7 +39,14 @@ export class UserRepository implements IUserRepository {
   async findById(id: string): Promise<User | null> {
     const user = await this.repository.findOne({
       where: { id },
-      relations: ["permissions", "roles", "profile", "profile.file"],
+      relations: [
+        "permissions",
+        "roles",
+        "profile",
+        "profile.file",
+        "profile.socialNetworks",
+        "profile.socialNetworks.socialNetworkType",
+      ],
     });
     return user;
   }

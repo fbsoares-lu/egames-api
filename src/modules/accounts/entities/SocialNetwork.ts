@@ -18,7 +18,7 @@ export class SocialNetwork {
   @PrimaryGeneratedColumn("uuid")
   public id?: string;
 
-  @Column()
+  @Column({ name: "social_network_url" })
   public socialNetworkUrl: string;
 
   @CreateDateColumn({ name: "created_at" })
