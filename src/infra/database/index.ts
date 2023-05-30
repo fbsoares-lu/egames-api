@@ -24,6 +24,12 @@ import { AddProfileIdToUsers1685129751747 } from "./migrations/1685129751747-Add
 import { AddProfileIdInSocialNetworks1685149053699 } from "./migrations/1685149053699-AddProfileIdInSocialNetworks";
 import { CreateRecoveryTokens1685391675571 } from "./migrations/1685391675571-CreateRecoveryTokens";
 import { RecoveryToken } from "../../modules/accounts/entities/RecoveryToken";
+import { CreatePaymentOptions1685462044417 } from "./migrations/1685462044417-CreatePaymentOptions";
+import { CreateCategories1685468564259 } from "./migrations/1685468564259-CreateCategories";
+import { CreateAnnouncements1685468680471 } from "./migrations/1685468680471-CreateAnnouncements";
+import { CreateAnnouncementPaymentOptions1685469241388 } from "./migrations/1685469241388-CreateAnnouncementPaymentOptions";
+import { CreateAnnouncementCategories1685469440972 } from "./migrations/1685469440972-CreateAnnouncementCategories";
+import { CreateAnnouncementFiles1685469623114 } from "./migrations/1685469623114-CreateAnnouncementFiles";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -56,5 +62,11 @@ export const AppDataSource = new DataSource({
     AddProfileIdToUsers1685129751747,
     AddProfileIdInSocialNetworks1685149053699,
     CreateRecoveryTokens1685391675571,
+    CreatePaymentOptions1685462044417,
+    CreateCategories1685468564259,
+    CreateAnnouncements1685468680471,
+    CreateAnnouncementPaymentOptions1685469241388,
+    CreateAnnouncementCategories1685469440972,
+    CreateAnnouncementFiles1685469623114,
   ],
 });
