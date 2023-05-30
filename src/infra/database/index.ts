@@ -22,6 +22,8 @@ import { SocialNetwork } from "../../modules/accounts/entities/SocialNetwork";
 import { SocialNetworkType } from "../../modules/accounts/entities/SocialNetworkType";
 import { AddProfileIdToUsers1685129751747 } from "./migrations/1685129751747-AddProfileIdToUsers";
 import { AddProfileIdInSocialNetworks1685149053699 } from "./migrations/1685149053699-AddProfileIdInSocialNetworks";
+import { CreateRecoveryTokens1685391675571 } from "./migrations/1685391675571-CreateRecoveryTokens";
+import { RecoveryToken } from "../../modules/accounts/entities/RecoveryToken";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -38,6 +40,7 @@ export const AppDataSource = new DataSource({
     Profile,
     SocialNetwork,
     SocialNetworkType,
+    RecoveryToken,
   ],
   migrations: [
     CreateUsers1684434930536,
@@ -52,5 +55,6 @@ export const AppDataSource = new DataSource({
     CreateSocialNetworks1685070142131,
     AddProfileIdToUsers1685129751747,
     AddProfileIdInSocialNetworks1685149053699,
+    CreateRecoveryTokens1685391675571,
   ],
 });

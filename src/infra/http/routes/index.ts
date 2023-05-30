@@ -7,6 +7,7 @@ import { filesRoutes } from "./files.routes";
 import { socialNetworkTypesRoutes } from "./socialNetworkTypes.routes";
 import { socialNetworksRoutes } from "./socialNetwork.routes";
 import { profilesRoutes } from "./profile.routes";
+import { recoveyRoutes } from "./recovery.routes";
 
 const router = Router();
 
@@ -18,5 +19,6 @@ router.use("/files", filesRoutes);
 router.use("/social-network-types", socialNetworkTypesRoutes);
 router.use("/social-networks", socialNetworksRoutes);
 router.use("/profiles", profilesRoutes);
+router.use("/recovery", recoveyRoutes);
 
 export { router };
