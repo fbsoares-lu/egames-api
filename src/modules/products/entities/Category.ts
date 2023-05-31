@@ -8,13 +8,16 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 
-@Entity("payment_options")
-export class PaymentOption {
+@Entity("categories")
+export class Category {
   @PrimaryGeneratedColumn("uuid")
   public id?: string;
 
   @Column()
-  public type: string;
+  public name: string;
+
+  @Column()
+  public description: string | null;
 
   @CreateDateColumn({ name: "created_at" })
   public createdAt?: Date;
@@ -25,9 +28,10 @@ export class PaymentOption {
   @DeleteDateColumn({ name: "deleted_at" })
   public deletedAt?: Date | null;
 
-  constructor(type: string) {
+  constructor(name: string, description: string) {
     this.id = randomUUID();
-    this.type = type;
+    this.name = name;
+    this.description = description;
     this.createdAt = new Date();
     this.updatedAt = new Date();
     this.deletedAt = null;

@@ -16,6 +16,7 @@ import { Permission } from "./Permission";
 import { Role } from "./Role";
 import { File } from "../../files/entities/File";
 import { Profile } from "./Profile";
+import { Announcement } from "../../products/entities/Announcement";
 
 @Entity("users")
 export class User {
@@ -73,4 +74,7 @@ export class User {
     referencedColumnName: "id",
   })
   profile: Profile;
+
+  @OneToMany(() => Announcement, (announcement) => announcement.user)
+  announcements: Announcement[];
 }
