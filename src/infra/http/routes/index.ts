@@ -9,6 +9,7 @@ import { socialNetworksRoutes } from "./socialNetwork.routes";
 import { profilesRoutes } from "./profile.routes";
 import { recoveyRoutes } from "./recovery.routes";
 import { paymentRoutes } from "./payment.routes";
+import { categoryRoutes } from "./category.routes";
 
 const router = Router();
 
@@ -22,5 +23,6 @@ router.use("/social-networks", socialNetworksRoutes);
 router.use("/profiles", profilesRoutes);
 router.use("/recovery", recoveyRoutes);
 router.use("/payments", paymentRoutes);
+router.use("/categories", categoryRoutes);
 
 export { router };
