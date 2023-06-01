@@ -10,6 +10,20 @@ export class InMemoryPaymentOptionsRepository
     this.repository = [];
   }
 
+  async findByIds(ids: string[]): Promise<PaymentOption[]> {
+    const paymentOptionsFound: PaymentOption[] = [];
+
+    for (var i = 0; i < ids.length; i++) {
+      for (var j = 0; j < this.repository.length; j++) {
+        if (this.repository[j].id === ids[i]) {
+          paymentOptionsFound.push(this.repository[i]);
+        }
+      }
+    }
+
+    return paymentOptionsFound;
+  }
+
   async findByType(type: string): Promise<PaymentOption | null> {
     const paymentOption = this.repository.find((item) => item.type === type);
     return paymentOption ?? null;

@@ -1,4 +1,4 @@
-import { Repository } from "typeorm";
+import { In, Repository } from "typeorm";
 import { IPaymentOptionsRepository } from "../IPaymentOptionsRepository";
 import { PaymentOption } from "../../entities/PaymentOption";
 import { AppDataSource } from "../../../../infra/database";
@@ -8,6 +8,11 @@ export class PaymentOptionsRepository implements IPaymentOptionsRepository {
 
   constructor() {
     this.repository = AppDataSource.getRepository(PaymentOption);
+  }
+
+  async findByIds(ids: string[]): Promise<PaymentOption[]> {
+    const paymentOptions = await this.repository.findBy({ id: In(ids) });
+    return paymentOptions;
   }
 
   async findByType(type: string): Promise<PaymentOption | null> {

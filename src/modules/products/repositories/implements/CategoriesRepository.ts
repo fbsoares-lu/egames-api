@@ -1,4 +1,4 @@
-import { Repository } from "typeorm";
+import { In, Repository } from "typeorm";
 import { IPaymentOptionsRepository } from "../IPaymentOptionsRepository";
 import { PaymentOption } from "../../entities/PaymentOption";
 import { AppDataSource } from "../../../../infra/database";
@@ -11,6 +11,11 @@ export class CategoriesRepository implements ICategoriesRepository {
 
   constructor() {
     this.repository = AppDataSource.getRepository(Category);
+  }
+
+  async findByIds(ids: string[]): Promise<Category[]> {
+    const categories = await this.repository.findBy({ id: In(ids) });
+    return categories;
   }
 
   async findByName(name: string): Promise<Category | null> {

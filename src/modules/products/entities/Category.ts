@@ -16,8 +16,8 @@ export class Category {
   @Column()
   public name: string;
 
-  @Column()
-  public description: string | null;
+  @Column({ name: "description" })
+  public description: string;
 
   @CreateDateColumn({ name: "created_at" })
   public createdAt?: Date;

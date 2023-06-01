@@ -1,4 +1,4 @@
-import { Repository } from "typeorm";
+import { In, Repository } from "typeorm";
 
 import { AppDataSource } from "../../../../infra/database";
 import { IUploadFileDTO } from "../../dtos/IUploadFileDTO";
@@ -10,6 +10,11 @@ export class FileRepository implements IFileRepository {
 
   constructor() {
     this.repository = AppDataSource.getRepository(File);
+  }
+
+  async findByIds(ids: string[]): Promise<File[]> {
+    const files = await this.repository.findBy({ id: In(ids) });
+    return files;
   }
 
   async findById(id: string): Promise<File | null> {

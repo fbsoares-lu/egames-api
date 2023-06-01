@@ -30,6 +30,9 @@ import { CreateAnnouncements1685468680471 } from "./migrations/1685468680471-Cre
 import { CreateAnnouncementPaymentOptions1685469241388 } from "./migrations/1685469241388-CreateAnnouncementPaymentOptions";
 import { CreateAnnouncementCategories1685469440972 } from "./migrations/1685469440972-CreateAnnouncementCategories";
 import { CreateAnnouncementFiles1685469623114 } from "./migrations/1685469623114-CreateAnnouncementFiles";
+import { Announcement } from "../../modules/products/entities/Announcement";
+import { PaymentOption } from "../../modules/products/entities/PaymentOption";
+import { Category } from "../../modules/products/entities/Category";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -47,6 +50,9 @@ export const AppDataSource = new DataSource({
     SocialNetwork,
     SocialNetworkType,
     RecoveryToken,
+    Announcement,
+    PaymentOption,
+    Category,
   ],
   migrations: [
     CreateUsers1684434930536,
