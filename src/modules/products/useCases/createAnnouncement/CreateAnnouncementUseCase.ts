@@ -13,6 +13,7 @@ export interface IRequest {
   userId: string;
   status: boolean;
   announcementName: string;
+  announcementState: string;
   announcementDescription: string;
   announcementPrice: number;
   isExchangeable: boolean;
@@ -35,6 +36,7 @@ export class CreateAnnouncementUseCase {
     status,
     announcementDescription,
     announcementName,
+    announcementState,
     announcementPrice,
     isExchangeable,
     paymentOptionIds,
@@ -57,6 +59,7 @@ export class CreateAnnouncementUseCase {
       status,
       announcementName,
       announcementDescription,
+      announcementState,
       announcementPrice,
       isExchangeable
     );

@@ -68,6 +68,7 @@ describe("Create announcement", () => {
     await createAnnouncementUseCase.execute({
       userId: String(inMemoryUserRepository.repository[0].id),
       announcementName: "Chevrolet Camaro",
+      announcementState: "old",
       announcementDescription: "Description...",
       announcementPrice: 200000.0,
       status: true,
@@ -109,6 +110,7 @@ describe("Create announcement", () => {
       return await createAnnouncementUseCase.execute({
         userId: "invalid-uuid",
         announcementName: "Chevrolet Camaro",
+        announcementState: "old",
         announcementDescription: "Description...",
         announcementPrice: 200000.0,
         status: true,

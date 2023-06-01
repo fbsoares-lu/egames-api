@@ -13,7 +13,15 @@ export class InMemoryAnnouncementRepository implements IAnnouncementRepository {
     this.repository = [];
   }
 
-  async find(page: number, pageSize: number): Promise<IPaginationResponse> {
+  async find(
+    page: number,
+    pageSize: number,
+    search?: string,
+    states?: string[],
+    exchangable?: boolean,
+    paymentOptions?: string[],
+    categories?: string[]
+  ): Promise<IPaginationResponse> {
     const announcements = this.repository;
 
     const paginationResponse = PaginationResponse.handle({
@@ -50,6 +58,8 @@ export class InMemoryAnnouncementRepository implements IAnnouncementRepository {
     this.repository[announcementIndex].announcementPrice =
       payload.announcementPrice;
     this.repository[announcementIndex].isExchangeable = payload.isExchangeable;
+    this.repository[announcementIndex].announcementState =
+      payload.announcementState;
   }
 
   async delete(data: Announcement): Promise<void> {

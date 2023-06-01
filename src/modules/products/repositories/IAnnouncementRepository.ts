@@ -3,7 +3,15 @@ import { IUpdateAnnouncementDTO } from "../dtos/IUpdateAnnouncementDTO";
 import { Announcement } from "../entities/Announcement";
 
 export abstract class IAnnouncementRepository {
-  abstract find(page: number, pageSize: number): Promise<IPaginationResponse>;
+  abstract find(
+    page: number,
+    pageSize: number,
+    search?: string,
+    states?: string[],
+    exchangable?: boolean,
+    paymentOptions?: string[],
+    categories?: string[]
+  ): Promise<IPaginationResponse>;
   abstract findById(id: string): Promise<Announcement | null>;
   abstract create(data: Announcement): Promise<void>;
   abstract update(

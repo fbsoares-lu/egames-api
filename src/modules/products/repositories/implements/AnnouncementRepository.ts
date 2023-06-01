@@ -15,11 +15,51 @@ export class AnnouncementRepository implements IAnnouncementRepository {
     this.repository = AppDataSource.getRepository(Announcement);
   }
 
-  async find(page: number, pageSize: number): Promise<IPaginationResponse> {
-    const [result, total] = await this.repository.findAndCount({
-      skip: (page - 1) * pageSize,
-      take: pageSize,
-    });
+  async find(
+    page: number,
+    pageSize: number,
+    search?: string,
+    states?: string[],
+    exchangable?: boolean,
+    paymentOptions?: string[],
+    categories?: string[]
+  ): Promise<IPaginationResponse> {
+    const query = this.repository
+      .createQueryBuilder("announcements")
+      .where("announcements.status := status", { status: true });
+
+    if (search) {
+      query.andWhere("announcements.announcement_name := search", { search });
+    }
+
+    if (states && states.length > 0) {
+      query.andWhere("announcements.announcement_state IN (:...state)", {
+        states,
+      });
+    }
+
+    if (exchangable) {
+      query.andWhere("announcements.is_exchangeable := exchangable", {
+        exchangable,
+      });
+    }
+
+    if (paymentOptions && paymentOptions.length > 0) {
+      query.leftJoinAndSelect("announcements.paymentOptions", "paymentOptions");
+      query.andWhere("paymentOptions.type IN (:...paymentOptions)", {
+        paymentOptions,
+      });
+    }
+
+    if (categories && categories.length > 0) {
+      query.leftJoinAndSelect("announcements.categories", "category");
+      query.andWhere("category.name IN (:...categories)", { categories });
+    }
+
+    const [result, total] = await query
+      .take(pageSize)
+      .skip((page - 1) * pageSize)
+      .getManyAndCount();
 
     return PaginationResponse.handle({
       data: result,
@@ -30,7 +70,11 @@ export class AnnouncementRepository implements IAnnouncementRepository {
   }
 
   async findById(id: string): Promise<Announcement | null> {
-    return await this.repository.findOneBy({ id });
+    const user = await this.repository.findOne({
+      where: { id },
+      relations: ["user", "paymentOptions", "categories", "files"],
+    });
+    return user;
   }
 
   async create(data: Announcement): Promise<void> {
@@ -43,6 +87,7 @@ export class AnnouncementRepository implements IAnnouncementRepository {
   ): Promise<void> {
     data.status = payload.status;
     data.announcementName = payload.announcementName;
+    data.announcementState = payload.announcementState;
     data.announcementDescription = payload.announcementDescription;
     data.announcementPrice = payload.announcementPrice;
     data.isExchangeable = payload.isExchangeable;

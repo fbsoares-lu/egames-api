@@ -10,6 +10,7 @@ export interface IRequest {
   id: string;
   status: boolean;
   announcementName: string;
+  announcementState: string;
   announcementDescription: string;
   announcementPrice: number;
   isExchangeable: boolean;
@@ -30,6 +31,7 @@ export class UpdateAnnouncementUseCase {
     id,
     status,
     announcementDescription,
+    announcementState,
     announcementName,
     announcementPrice,
     isExchangeable,
@@ -55,6 +57,7 @@ export class UpdateAnnouncementUseCase {
     await this.announcementRepository.update(announcement, {
       status,
       announcementDescription,
+      announcementState,
       announcementName,
       announcementPrice,
       isExchangeable,

@@ -61,6 +61,7 @@ describe("Update announcement", () => {
       true,
       "Bike",
       "Bike description...",
+      "old",
       250,
       true
     );
@@ -70,6 +71,7 @@ describe("Update announcement", () => {
       id: String(inMemoryAnnouncementRepository.repository[0].id),
       announcementName: "Chevrolet Camaro",
       announcementDescription: "Description...",
+      announcementState: "old",
       announcementPrice: 200000.0,
       status: true,
       isExchangeable: false,
@@ -113,6 +115,7 @@ describe("Update announcement", () => {
         id: "invalid_uuid",
         announcementName: "Chevrolet Camaro",
         announcementDescription: "Description...",
+        announcementState: "new",
         announcementPrice: 200000.0,
         status: true,
         isExchangeable: false,

@@ -30,6 +30,10 @@ export class CreateAnnouncements1685468680471 implements MigrationInterface {
             type: "varchar",
           },
           {
+            name: "announcement_state",
+            type: "varchar",
+          },
+          {
             name: "announcement_price",
             type: "money",
           },

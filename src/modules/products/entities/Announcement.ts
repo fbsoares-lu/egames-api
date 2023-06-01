@@ -27,6 +27,9 @@ export class Announcement {
   @Column({ name: "announcement_name" })
   public announcementName: string;
 
+  @Column({ name: "announcement_state" })
+  public announcementState: string;
+
   @Column({ name: "announcement_description" })
   public announcementDescription: string;
 
@@ -49,12 +52,14 @@ export class Announcement {
     status: boolean,
     announcementName: string,
     announcementDescription: string,
+    announcementState: string,
     announcementPrice: number,
     isExchangeable: boolean
   ) {
     this.id = randomUUID();
     this.status = status;
     this.announcementName = announcementName;
+    this.announcementState = announcementState;
     this.announcementDescription = announcementDescription;
     this.announcementPrice = announcementPrice;
     this.isExchangeable = isExchangeable;
