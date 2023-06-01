@@ -1,4 +1,5 @@
 import { BadRequestException } from "../../../../errors/BadRequestException";
+import { NotFoundException } from "../../../../errors/NotFoundException";
 import { InMemoryUserRepository } from "../../../accounts/repositories/InMemoryUserRepository";
 import { InMemoryFileRepository } from "../../../files/repositories/InMemoryFileRepository";
 import { Category } from "../../entities/Category";
@@ -76,6 +77,46 @@ describe("Create announcement", () => {
       fileIds: files,
     });
 
-    expect(inMemoryCategoriesRepository.repository[0].id).toBeTruthy();
+    expect(inMemoryAnnouncementRepository.repository[0].id).toBeTruthy();
+  });
+
+  it("should not be able to create a new announcement with invalid user id", async () => {
+    const categories: string[] = [];
+    const categoryOne = new Category("Cars", "Cars description...");
+    inMemoryCategoriesRepository.create(categoryOne);
+    categories.push(String(inMemoryCategoriesRepository.repository[0].id));
+
+    const categoryTwo = new Category("Automotive", "Automotive description...");
+    inMemoryCategoriesRepository.create(categoryTwo);
+    categories.push(String(inMemoryCategoriesRepository.repository[1].id));
+
+    const paymentOptions: string[] = [];
+    const paymentOption = new PaymentOption("creadit_card");
+    inMemoryPaymentOptionsRepository.create(paymentOption);
+    paymentOptions.push(
+      String(inMemoryPaymentOptionsRepository.repository[0].id)
+    );
+
+    const files: string[] = [];
+    inMemoryFileRepository.create({
+      path: "path",
+      originalName: "original.png",
+      type: "png",
+    });
+    files.push(String(inMemoryFileRepository.repository[0].id));
+
+    expect(async () => {
+      return await createAnnouncementUseCase.execute({
+        userId: "invalid-uuid",
+        announcementName: "Chevrolet Camaro",
+        announcementDescription: "Description...",
+        announcementPrice: 200000.0,
+        status: true,
+        isExchangeable: false,
+        categoryIds: categories,
+        paymentOptionIds: paymentOptions,
+        fileIds: files,
+      });
+    }).rejects.toThrow(NotFoundException);
   });
 });

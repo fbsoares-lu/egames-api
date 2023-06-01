@@ -2,6 +2,7 @@ import {
   IPaginationResponse,
   PaginationResponse,
 } from "../../../helpers/PaginationResponse";
+import { IUpdateAnnouncementDTO } from "../dtos/IUpdateAnnouncementDTO";
 import { Announcement } from "../entities/Announcement";
 import { IAnnouncementRepository } from "./IAnnouncementRepository";
 
@@ -33,12 +34,22 @@ export class InMemoryAnnouncementRepository implements IAnnouncementRepository {
     this.repository.push(data);
   }
 
-  async update(data: Announcement, payload: Announcement): Promise<void> {
+  async update(
+    data: Announcement,
+    payload: IUpdateAnnouncementDTO
+  ): Promise<void> {
     const announcementIndex = this.repository.findIndex(
       (item) => item.id === data.id
     );
 
-    this.repository[announcementIndex] = payload;
+    this.repository[announcementIndex].status = payload.status;
+    this.repository[announcementIndex].announcementName =
+      payload.announcementName;
+    this.repository[announcementIndex].announcementDescription =
+      payload.announcementDescription;
+    this.repository[announcementIndex].announcementPrice =
+      payload.announcementPrice;
+    this.repository[announcementIndex].isExchangeable = payload.isExchangeable;
   }
 
   async delete(data: Announcement): Promise<void> {

@@ -6,6 +6,7 @@ import {
   IPaginationResponse,
   PaginationResponse,
 } from "../../../../helpers/PaginationResponse";
+import { IUpdateAnnouncementDTO } from "../../dtos/IUpdateAnnouncementDTO";
 
 export class AnnouncementRepository implements IAnnouncementRepository {
   private repository: Repository<Announcement>;
@@ -36,7 +37,10 @@ export class AnnouncementRepository implements IAnnouncementRepository {
     await this.repository.save(data);
   }
 
-  async update(data: Announcement, payload: Announcement): Promise<void> {
+  async update(
+    data: Announcement,
+    payload: IUpdateAnnouncementDTO
+  ): Promise<void> {
     data.status = payload.status;
     data.announcementName = payload.announcementName;
     data.announcementDescription = payload.announcementDescription;
