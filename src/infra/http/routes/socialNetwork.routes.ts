@@ -7,7 +7,6 @@ import { createSocialNetworkController } from "../../../modules/accounts/useCase
 import { updateSocialNetworkController } from "../../../modules/accounts/useCases/updateSocialNetwork";
 import { deleteSocialNetworkController } from "../../../modules/accounts/useCases/deleteSocialNetwork";
 import { ensuredCanChangeSocialNetwork } from "../middlewares/ensuredCanChangeSocialNetwork";
-import { UpdateSocialNetworkValidation } from "../validations/accounts/UpdateSocialNetworkValidation";
 import { CreateSocialNetworkValidation } from "../validations/accounts/CreateSocialNetworkValidation";
 
 const socialNetworksRoutes = Router();
@@ -28,7 +27,6 @@ socialNetworksRoutes.put(
   ensuredAuthentication,
   ensuredCanChangeSocialNetwork,
   is(["admin", "customer"]),
-  UpdateSocialNetworkValidation.handle(),
   (request: Request, response: Response) => {
     ResponseValidationBase.handle(request, response);
     return updateSocialNetworkController.handle(request, response);

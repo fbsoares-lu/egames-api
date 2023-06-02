@@ -9,7 +9,7 @@ export async function ensuredCanChangeProfile(
   next: NextFunction
 ) {
   const { userId } = request;
-  const { id } = request.body;
+  const { id } = request.params;
 
   const repository = new ProfileRepository();
   const profile = await repository.findById(id);

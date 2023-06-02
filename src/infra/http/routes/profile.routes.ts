@@ -7,7 +7,6 @@ import { updateProfileController } from "../../../modules/accounts/useCases/upda
 import { ensuredCanChangeProfile } from "../middlewares/ensuredCanChangeProfile";
 import { CreateProfileValidation } from "../validations/accounts/CreateProfileValidation";
 import { ResponseValidationBase } from "../validations/ResponseValidationBase";
-import { UpdateProfileValidation } from "../validations/accounts/UpdateProfileValidation";
 
 const profilesRoutes = Router();
 
@@ -26,9 +25,7 @@ profilesRoutes.put(
   ensuredAuthentication,
   ensuredCanChangeProfile,
   is(["customer"]),
-  UpdateProfileValidation.handle(),
   (request: Request, response: Response) => {
-    ResponseValidationBase.handle(request, response);
     return updateProfileController.handle(request, response);
   }
 );

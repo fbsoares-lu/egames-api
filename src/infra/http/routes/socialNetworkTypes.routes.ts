@@ -6,7 +6,6 @@ import { is } from "../middlewares/permissions";
 import { CreateSocialNetworkTypeValidation } from "../validations/accounts/CreateSocialNetworkTypeValidation";
 import { ResponseValidationBase } from "../validations/ResponseValidationBase";
 import { createSocialNetworkTypeController } from "../../../modules/accounts/useCases/createSocialNetworkType";
-import { UpdateSocialNetworkTypeValidation } from "../validations/accounts/UpdateSocialNetworkTypeValidation";
 import { updateSocialNetworkTypeController } from "../../../modules/accounts/useCases/updateSocialNetworkType";
 import { deleteSocialNetworkTypeController } from "../../../modules/accounts/useCases/deleteSocialNetworkType";
 
@@ -36,7 +35,6 @@ socialNetworkTypesRoutes.put(
   "/:id",
   ensuredAuthentication,
   is(["admin"]),
-  UpdateSocialNetworkTypeValidation.handle(),
   (request: Request, response: Response) => {
     ResponseValidationBase.handle(request, response);
     return updateSocialNetworkTypeController.handle(request, response);
