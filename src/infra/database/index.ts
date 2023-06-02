@@ -33,6 +33,7 @@ import { CreateAnnouncementFiles1685469623114 } from "./migrations/1685469623114
 import { Announcement } from "../../modules/products/entities/Announcement";
 import { PaymentOption } from "../../modules/products/entities/PaymentOption";
 import { Category } from "../../modules/products/entities/Category";
+import { UpdateAnnouncementPrice1685724927975 } from "./migrations/1685724927975-UpdateAnnouncementPrice";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -74,5 +75,6 @@ export const AppDataSource = new DataSource({
     CreateAnnouncementPaymentOptions1685469241388,
     CreateAnnouncementCategories1685469440972,
     CreateAnnouncementFiles1685469623114,
+    UpdateAnnouncementPrice1685724927975,
   ],
 });
