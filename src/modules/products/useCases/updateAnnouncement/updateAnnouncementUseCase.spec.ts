@@ -58,7 +58,6 @@ describe("Update announcement", () => {
     files.push(String(inMemoryFileRepository.repository[0].id));
 
     const announcement = new Announcement(
-      true,
       "Bike",
       "Bike description...",
       "old",

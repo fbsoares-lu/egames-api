@@ -49,15 +49,15 @@ export class Announcement {
   public deletedAt?: Date | null;
 
   constructor(
-    status: boolean,
     announcementName: string,
     announcementDescription: string,
     announcementState: string,
     announcementPrice: number,
-    isExchangeable: boolean
+    isExchangeable: boolean,
+    status?: boolean
   ) {
     this.id = randomUUID();
-    this.status = status;
+    status ? (this.status = status) : true;
     this.announcementName = announcementName;
     this.announcementState = announcementState;
     this.announcementDescription = announcementDescription;

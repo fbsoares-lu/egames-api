@@ -10,34 +10,62 @@ import { ResponseValidationBase } from "../validations/ResponseValidationBase";
 import { createUserAccessControlListController } from "../../../modules/accounts/useCases/createUserAccessControlList";
 import { ensuredAuthentication } from "../middlewares/ensuredAuthentication";
 import { can, is } from "../middlewares/permissions";
+import { ensuredSameUser } from "../middlewares/ensuredSameUser";
 
 const usersRoutes = Router();
 
-usersRoutes.get("/", (request, response) => {
-  return listUserController.handle(request, response);
-});
-usersRoutes.get("/:id", (request, response) => {
-  return showUserController.handle(request, response);
-});
-usersRoutes.post(
+usersRoutes.get(
   "/",
   ensuredAuthentication,
-  can(["create"]),
-  is(["employee"]),
+  is(["admin"]),
+  (request, response) => {
+    return listUserController.handle(request, response);
+  }
+);
+
+usersRoutes.get(
+  "/:id",
+  ensuredAuthentication,
+  ensuredSameUser,
+  (request, response) => {
+    return showUserController.handle(request, response);
+  }
+);
+
+usersRoutes.post(
+  "/",
   CreateUserValidation.handle(),
   (request: Request, response: Response) => {
     ResponseValidationBase.handle(request, response);
     return createUserController.handle(request, response);
   }
 );
-usersRoutes.put("/:id", (request, response) => {
-  return updateUserController.handle(request, response);
-});
-usersRoutes.delete("/:id", (request, response) => {
-  return deleteUserController.handle(request, response);
-});
-usersRoutes.post("/:id/acl", ensuredAuthentication, (request, response) => {
-  return createUserAccessControlListController.handle(request, response);
-});
+
+usersRoutes.put(
+  "/:id",
+  ensuredAuthentication,
+  ensuredSameUser,
+  (request, response) => {
+    return updateUserController.handle(request, response);
+  }
+);
+
+usersRoutes.delete(
+  "/:id",
+  ensuredAuthentication,
+  ensuredSameUser,
+  (request, response) => {
+    return deleteUserController.handle(request, response);
+  }
+);
+
+usersRoutes.post(
+  "/:id/acl",
+  ensuredAuthentication,
+  is(["admin"]),
+  (request, response) => {
+    return createUserAccessControlListController.handle(request, response);
+  }
+);
 
 export { usersRoutes };

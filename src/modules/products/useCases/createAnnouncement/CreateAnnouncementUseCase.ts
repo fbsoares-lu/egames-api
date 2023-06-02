@@ -11,7 +11,6 @@ import { IPaymentOptionsRepository } from "../../repositories/IPaymentOptionsRep
 
 export interface IRequest {
   userId: string;
-  status: boolean;
   announcementName: string;
   announcementState: string;
   announcementDescription: string;
@@ -33,7 +32,6 @@ export class CreateAnnouncementUseCase {
 
   async execute({
     userId,
-    status,
     announcementDescription,
     announcementName,
     announcementState,
@@ -56,7 +54,6 @@ export class CreateAnnouncementUseCase {
     );
 
     const announcement = new Announcement(
-      status,
       announcementName,
       announcementDescription,
       announcementState,

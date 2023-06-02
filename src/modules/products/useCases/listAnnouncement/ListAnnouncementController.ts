@@ -14,8 +14,8 @@ export class ListAnnouncementController {
     const { categories }: { categories?: string[] } = request.query;
 
     const announcements = await this.listAnnouncementUseCase.execute({
-      page: Number(page),
-      pageSize: Number(pageSize),
+      page,
+      pageSize,
       search,
       states,
       exchangable,

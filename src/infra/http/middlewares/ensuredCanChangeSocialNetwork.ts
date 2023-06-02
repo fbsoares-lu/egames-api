@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from "express";
 
-import { UnauthorizedException } from "../../../errors/UnauthorizedException";
 import { SocialNetworkRepository } from "../../../modules/accounts/repositories/implementation/SocialNetworkRepository";
 import { ForbiddenException } from "../../../errors/ForbiddenException";
 import { BadRequestException } from "../../../errors/BadRequestException";
@@ -11,7 +10,7 @@ export async function ensuredCanChangeSocialNetwork(
   next: NextFunction
 ) {
   const { userId } = request;
-  const { id } = request.body;
+  const { id } = request.params;
 
   const repository = new SocialNetworkRepository();
   const socialNetwork = await repository.findById(id);
@@ -24,7 +23,7 @@ export async function ensuredCanChangeSocialNetwork(
     socialNetwork?.profile.user.id === userId;
 
   if (!canChangeSocialNetworkreponse) {
-    throw new ForbiddenException("user has not permission to edit!");
+    throw new ForbiddenException("user has not permission");
   }
 
   return next();

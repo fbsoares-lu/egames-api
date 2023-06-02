@@ -1,8 +1,5 @@
 import { NextFunction, Request, Response } from "express";
 
-import { ForbiddenException } from "../../../errors/ForbiddenException";
-import { ProfileRepository } from "../../../modules/accounts/repositories/implementation/ProfileRepository";
-import { UserRepository } from "../../../modules/accounts/repositories/implementation/UserRepository";
 import { NotFoundException } from "../../../errors/NotFoundException";
 import { AnnouncementRepository } from "../../../modules/products/repositories/implements/AnnouncementRepository";
 
@@ -12,7 +9,7 @@ export async function ensuredCanChangeAnnouncement(
   next: NextFunction
 ) {
   const { userId } = request;
-  const { id } = request.body;
+  const { id } = request.params;
 
   const announcementRepository = new AnnouncementRepository();
   const announcement = await announcementRepository.findById(id);

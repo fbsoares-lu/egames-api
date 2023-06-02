@@ -15,7 +15,7 @@ export async function ensuredCanChangeProfile(
   const profile = await repository.findById(id);
 
   if (profile?.user.id !== userId) {
-    throw new ForbiddenException("user has not permission to edit!");
+    throw new ForbiddenException("user has not permission");
   }
 
   return next();

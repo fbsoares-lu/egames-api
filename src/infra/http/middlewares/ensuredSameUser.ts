@@ -3,19 +3,21 @@ import { NextFunction, Request, Response } from "express";
 import { ForbiddenException } from "../../../errors/ForbiddenException";
 import { UserRepository } from "../../../modules/accounts/repositories/implementation/UserRepository";
 
-export async function ensuredEmailMatchWithUserAccount(
+export async function ensuredSameUser(
   request: Request,
   response: Response,
   next: NextFunction
 ) {
   const { userId } = request;
-  const { email } = request.body;
+  const { id } = request.params;
 
   const repository = new UserRepository();
-
   const user = await repository.findById(userId);
+  const hasAdminRole = user?.roles.find((item) => item.name === "admin");
 
-  if (user?.email !== email) {
+  const isSameUser = userId === id;
+
+  if (!isSameUser && !hasAdminRole) {
     throw new ForbiddenException("user has not permission");
   }
 

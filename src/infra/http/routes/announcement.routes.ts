@@ -41,9 +41,7 @@ announcementRoutes.put(
   "/:id",
   ensuredAuthentication,
   ensuredCanChangeAnnouncement,
-  CreateAnnouncementValidation.handle(),
   (request: Request, response: Response) => {
-    ResponseValidationBase.handle(request, response);
     return updateAnnouncementController.handle(request, response);
   }
 );
