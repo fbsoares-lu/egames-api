@@ -2,7 +2,7 @@ import { Router, Request, Response } from "express";
 import { ensuredAuthentication } from "../middlewares/ensuredAuthentication";
 import { ResponseValidationBase } from "../validations/ResponseValidationBase";
 import { is } from "../middlewares/permissions";
-import { CreatePaymentValidation } from "../validations/accounts/CreatePaymentValidation";
+import { CreatePaymentValidation } from "../validations/products/CreatePaymentValidation";
 import { createPaymentOptionController } from "../../../modules/products/useCases/createPaymentOption";
 import { updatePaymentOptionController } from "../../../modules/products/useCases/updatePaymentOption";
 import { deletePaymentOptionController } from "../../../modules/products/useCases/deletePaymentOption";

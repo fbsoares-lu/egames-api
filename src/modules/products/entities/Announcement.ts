@@ -93,7 +93,7 @@ export class Announcement {
 
   @ManyToMany(() => File)
   @JoinTable({
-    name: "announcement_categories",
+    name: "announcement_files",
     joinColumns: [{ name: "announcement_id" }],
     inverseJoinColumns: [{ name: "file_id" }],
   })

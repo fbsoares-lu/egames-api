@@ -5,26 +5,24 @@ export class ListAnnouncementController {
   constructor(private listAnnouncementUseCase: ListAnnouncementUseCase) {}
 
   public async handle(request: Request, response: Response) {
-    const {
-      page,
-      pageSize,
+    const { page }: { page?: number } = request.query;
+    const { pageSize }: { pageSize?: number } = request.query;
+    const { search }: { search?: string } = request.query;
+    const { states }: { states?: string[] } = request.query;
+    const { exchangable }: { exchangable?: boolean } = request.query;
+    const { paymentOptions }: { paymentOptions?: string[] } = request.query;
+    const { categories }: { categories?: string[] } = request.query;
+
+    const announcements = await this.listAnnouncementUseCase.execute({
+      page: Number(page),
+      pageSize: Number(pageSize),
       search,
       states,
       exchangable,
-      paymentOptions,
       categories,
-    } = request.query;
-
-    await this.listAnnouncementUseCase.execute({
-      page: Number(page),
-      pageSize: Number(pageSize),
-      search: String(search),
-      states: states as string[],
-      exchangable: Boolean(exchangable),
-      categories: categories as string[],
-      paymentOptions: paymentOptions as string[],
+      paymentOptions,
     });
 
-    return response.status(200).send();
+    return response.status(200).json(announcements);
   }
 }

@@ -10,6 +10,7 @@ import { profilesRoutes } from "./profile.routes";
 import { recoveyRoutes } from "./recovery.routes";
 import { paymentRoutes } from "./payment.routes";
 import { categoryRoutes } from "./category.routes";
+import { announcementRoutes } from "./announcement.routes";
 
 const router = Router();
 
@@ -24,5 +25,6 @@ router.use("/profiles", profilesRoutes);
 router.use("/recovery", recoveyRoutes);
 router.use("/payments", paymentRoutes);
 router.use("/categories", categoryRoutes);
+router.use("/announcements", announcementRoutes);
 
 export { router };

@@ -46,6 +46,10 @@ export class UserRepository implements IUserRepository {
         "profile.file",
         "profile.socialNetworks",
         "profile.socialNetworks.socialNetworkType",
+        "announcements",
+        "announcements.paymentOptions",
+        "announcements.categories",
+        "announcements.files",
       ],
     });
     return user;

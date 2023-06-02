@@ -3,8 +3,8 @@ import { Announcement } from "../../entities/Announcement";
 import { IAnnouncementRepository } from "../../repositories/IAnnouncementRepository";
 
 interface IRequest {
-  page: number;
-  pageSize: number;
+  page?: number;
+  pageSize?: number;
   search?: string;
   states?: string[];
   exchangable?: boolean;

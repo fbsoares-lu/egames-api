@@ -3,7 +3,7 @@ import { ensuredAuthentication } from "../middlewares/ensuredAuthentication";
 import { ResponseValidationBase } from "../validations/ResponseValidationBase";
 import { is } from "../middlewares/permissions";
 import { listCategoryController } from "../../../modules/products/useCases/listCategory";
-import { CreateCategoryValidation } from "../validations/accounts/CreateCategoryValidation";
+import { CreateCategoryValidation } from "../validations/products/CreateCategoryValidation";
 import { createCategoryController } from "../../../modules/products/useCases/createCategory";
 import { updateCategoryController } from "../../../modules/products/useCases/updateCategory";
 import { deleteCategoryController } from "../../../modules/products/useCases/deleteCategory";

@@ -26,33 +26,35 @@ export class AnnouncementRepository implements IAnnouncementRepository {
   ): Promise<IPaginationResponse> {
     const query = this.repository
       .createQueryBuilder("announcements")
-      .where("announcements.status := status", { status: true });
+      .andWhere("announcements.status = :status", { status: true });
 
     if (search) {
-      query.andWhere("announcements.announcement_name := search", { search });
+      query.andWhere("announcements.announcement_name ILIKE :search", {
+        search: `%${search}%`,
+      });
     }
 
     if (states && states.length > 0) {
-      query.andWhere("announcements.announcement_state IN (:...state)", {
+      query.andWhere("announcements.announcement_state IN (:...states)", {
         states,
       });
     }
 
     if (exchangable) {
-      query.andWhere("announcements.is_exchangeable := exchangable", {
+      query.andWhere("announcements.is_exchangeable = :exchangable", {
         exchangable,
       });
     }
 
     if (paymentOptions && paymentOptions.length > 0) {
-      query.leftJoinAndSelect("announcements.paymentOptions", "paymentOptions");
+      query.leftJoin("announcements.paymentOptions", "paymentOptions");
       query.andWhere("paymentOptions.type IN (:...paymentOptions)", {
         paymentOptions,
       });
     }
 
     if (categories && categories.length > 0) {
-      query.leftJoinAndSelect("announcements.categories", "category");
+      query.leftJoin("announcements.categories", "category");
       query.andWhere("category.name IN (:...categories)", { categories });
     }
 

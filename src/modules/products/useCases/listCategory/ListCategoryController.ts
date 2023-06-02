@@ -9,7 +9,7 @@ export class ListCategoryController {
   }
 
   public async handle(request: Request, response: Response) {
-    await this.listCategoryUseCase.execute();
-    return response.status(200).send();
+    const categories = await this.listCategoryUseCase.execute();
+    return response.status(200).json(categories);
   }
 }

@@ -20,6 +20,7 @@ export class ShowUserController {
         permissions: user.permissions,
         roles: user.roles,
         profile: user.profile,
+        announcements: user.announcements,
       },
     });
   }
