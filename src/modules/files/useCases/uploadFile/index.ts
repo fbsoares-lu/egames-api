@@ -1,9 +1,14 @@
+import { AWSFileStoreProvider } from "../../../../providers/FileStoreProvider/implementations/AWSFileStoreProvider";
 import { FileRepository } from "../../repositories/implementation/FileRepository";
 import { UploadFileController } from "./UploadFileController";
-import { UploadFileUsingAWSUseCase } from "./UploadFileUsingAWSUseCase";
+import { UploadFileUseCase } from "./UploadFileUseCase";
 
 const fileRepository = new FileRepository();
-const uploadFileUseCase = new UploadFileUsingAWSUseCase(fileRepository);
+const fileStoreProvider = new AWSFileStoreProvider();
+const uploadFileUseCase = new UploadFileUseCase(
+  fileRepository,
+  fileStoreProvider
+);
 const uploadFileController = new UploadFileController(uploadFileUseCase);
 
 export { uploadFileController };

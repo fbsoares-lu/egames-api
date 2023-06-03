@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import { IUploadFileUseCase } from "./IUploadFileUseCase";
+import { UploadFileUseCase } from "./UploadFileUseCase";
 
 export class UploadFileController {
-  private uploadFileUseCase: IUploadFileUseCase;
+  private uploadFileUseCase: UploadFileUseCase;
 
-  constructor(uploadFileUseCase: IUploadFileUseCase) {
+  constructor(uploadFileUseCase: UploadFileUseCase) {
     this.uploadFileUseCase = uploadFileUseCase;
   }
 
