@@ -16,7 +16,6 @@ describe("Delete announcement", () => {
 
   it("should be able to update a announcement", async () => {
     const announcement = new Announcement(
-      true,
       "Bike",
       "Bike description...",
       "old",

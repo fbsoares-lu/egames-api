@@ -16,7 +16,6 @@ describe("Show announcement", () => {
 
   it("should be able to show a announcement", async () => {
     const announcement = new Announcement(
-      true,
       "Bike",
       "Bike description...",
       "old",
