@@ -26,6 +26,10 @@ export class AnnouncementRepository implements IAnnouncementRepository {
   ): Promise<IPaginationResponse> {
     const query = this.repository
       .createQueryBuilder("announcements")
+      .leftJoinAndSelect("announcements.user", "user")
+      .leftJoinAndSelect("user.profile", "profile")
+      .leftJoinAndSelect("profile.file", "profileFile")
+      .leftJoinAndSelect("announcements.files", "file")
       .andWhere("announcements.status = :status", { status: true });
 
     if (search) {
