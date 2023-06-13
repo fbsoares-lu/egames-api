@@ -84,6 +84,7 @@ export class AnnouncementRepository implements IAnnouncementRepository {
   }
 
   async create(data: Announcement): Promise<void> {
+    data.status = true;
     await this.repository.save(data);
   }
 
