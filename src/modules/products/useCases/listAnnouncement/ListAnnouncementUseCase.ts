@@ -6,7 +6,7 @@ interface IRequest {
   page?: number;
   pageSize?: number;
   search?: string;
-  states?: string[];
+  state?: string;
   exchangable?: boolean;
   paymentOptions?: string[];
   categories?: string[];
@@ -19,7 +19,7 @@ export class ListAnnouncementUseCase {
     page,
     pageSize,
     search,
-    states,
+    state,
     categories,
     exchangable,
     paymentOptions,
@@ -31,7 +31,7 @@ export class ListAnnouncementUseCase {
       page,
       pageSize,
       search,
-      states,
+      state,
       exchangable,
       paymentOptions,
       categories

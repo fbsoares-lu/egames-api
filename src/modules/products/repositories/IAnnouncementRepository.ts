@@ -7,7 +7,7 @@ export abstract class IAnnouncementRepository {
     page: number,
     pageSize: number,
     search?: string,
-    states?: string[],
+    state?: string,
     exchangable?: boolean,
     paymentOptions?: string[],
     categories?: string[]

@@ -8,7 +8,7 @@ export class ListAnnouncementController {
     const { page }: { page?: number } = request.query;
     const { pageSize }: { pageSize?: number } = request.query;
     const { search }: { search?: string } = request.query;
-    const { states }: { states?: string[] } = request.query;
+    const { state }: { state?: string } = request.query;
     const { exchangable }: { exchangable?: boolean } = request.query;
     const { paymentOptions }: { paymentOptions?: string[] } = request.query;
     const { categories }: { categories?: string[] } = request.query;
@@ -17,7 +17,7 @@ export class ListAnnouncementController {
       page,
       pageSize,
       search,
-      states,
+      state,
       exchangable,
       categories,
       paymentOptions,

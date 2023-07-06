@@ -19,7 +19,7 @@ export class AnnouncementRepository implements IAnnouncementRepository {
     page: number,
     pageSize: number,
     search?: string,
-    states?: string[],
+    state?: string,
     exchangable?: boolean,
     paymentOptions?: string[],
     categories?: string[]
@@ -38,9 +38,9 @@ export class AnnouncementRepository implements IAnnouncementRepository {
       });
     }
 
-    if (states && states.length > 0) {
-      query.andWhere("announcements.announcement_state IN (:...states)", {
-        states,
+    if (state) {
+      query.andWhere("announcements.announcement_state ILIKE :state", {
+        state: `%${state}%`,
       });
     }
 
