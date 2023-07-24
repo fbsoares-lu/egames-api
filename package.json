@@ -7,6 +7,7 @@
     "test": "jest",
     "tsc": "tsc",
     "build": "tsc",
+    "start": "node dist/src/server.js",
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules --respawn src/server.ts",
     "typeorm": "typeorm-ts-node-commonjs",
     "migration:generate": "typeorm-ts-node-commonjs -d ./src/infra/database/index.ts migration:generate ./src/infra/database/migrations/default",
