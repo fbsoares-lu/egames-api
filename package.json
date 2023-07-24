@@ -11,6 +11,7 @@
     "typeorm": "typeorm-ts-node-commonjs",
     "migration:generate": "typeorm-ts-node-commonjs -d ./src/infra/database/index.ts migration:generate ./src/infra/database/migrations/default",
     "migration:run": "typeorm-ts-node-commonjs -d ./src/infra/database/index.ts migration:run --",
+    "migration:build": "typeorm-ts-node-commonjs -d ./src/infra/database/index.js migration:run --",
     "migration:revert": "typeorm-ts-node-commonjs -d ./src/infra/database/index.ts migration:revert --"
   },
   "keywords": [],
